@@ -23,7 +23,7 @@ public class Reserva {
     private Habitacion habitacion;
     private ArrayList<Extra> extras;
 
-    
+
     //constructor
     public Reserva(LocalDate checkIn, LocalDate checkOut, Cliente cliente, ArrayList<Cliente> listaCliente, MedioDePago formaDePago, LocalDate fechaReserva, EstadoReserva estado, Double montoTotal, LocalDateTime fechaDeReserva, Factura factura, Habitacion habitacion, ArrayList<Extra> extras) {
         this.checkIn = checkIn;

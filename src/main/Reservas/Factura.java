@@ -1,22 +1,21 @@
 package main.Reservas;
-import java.time.LocalDate;
 
 public class Factura {
-    private int nroFactura; 
-    private Double importe; 
+    private int nroFactura;
+    private Double importe;
     private String tipoConsumidor;
-    private LocalDate CAE; 
+    private String CAE;
 
 
-    //constructor 
-    public Factura(int nroFactura, Double importe, String tipoConsumidor, LocalDate CAE) {
+    //constructor
+    public Factura(int nroFactura, Double importe, String tipoConsumidor, String CAE) {
         this.nroFactura = nroFactura;
         this.importe = importe;
         this.tipoConsumidor = tipoConsumidor;
-        CAE = CAE;
+        this.CAE = CAE;
     }
 
-    //getters y setters 
+    //getters y setters
     public int getNroFactura() {
         return nroFactura;
     }
@@ -35,11 +34,11 @@ public class Factura {
     public void setTipoConsumidor(String tipoConsumidor) {
         this.tipoConsumidor = tipoConsumidor;
     }
-    public LocalDate getCAE() {
+    public String getCAE() {
         return CAE;
     }
-    public void setCAE(LocalDate cAE) {
-        CAE = CAE;
+    public void setCAE(String CAE) {
+        this.CAE = CAE;
     }
 
 }
