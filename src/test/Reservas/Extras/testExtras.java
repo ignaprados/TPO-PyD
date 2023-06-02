@@ -1,3 +1,5 @@
+package test.Reservas.Extras;
+
 // Import Junit
 import org.junit.Before;
 import org.junit.Test;
@@ -12,7 +14,7 @@ import main.Reservas.Extras.Extra;
 import main.Reservas.Extras.Extras;
 
 
-public class ExtrasTest {
+public class testExtras {
 
     private Extras extras;
     private Extra extra1;
@@ -31,11 +33,12 @@ public class ExtrasTest {
     @Test
     public void testAgregarExtra() {
         ArrayList<Extra> listaExtras = extras.getListaExtra();
-
         Extra extra3 = new Extra(003,"Extra 3",800);
         extras.agregarExtra(extra3);
+
         assertTrue(listaExtras.contains(extra3));
         assertEquals(listaExtras.size(), 3);
+
     }
 
     @Test
