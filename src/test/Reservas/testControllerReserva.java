@@ -37,7 +37,6 @@ public class testControllerReserva {
     private LocalDate fechaReserva;
 
 
-
     @Before
     public void setUp() {
         LocalDate checkIn = LocalDate.of(2023, 6, 4);
@@ -88,7 +87,6 @@ public class testControllerReserva {
 
         Reserva nueva_reserva = controller.getListaReservas().get(0);
 
-        // assert equals
         assertEquals(nueva_reserva.getCheckIn(), checkIn);
         assertEquals(nueva_reserva.getCheckOut(), checkOut);
         assertEquals(nueva_reserva.getCliente(), cliente);
@@ -96,14 +94,9 @@ public class testControllerReserva {
         assertEquals(nueva_reserva.getFormaDePago(), tarjetaCredito);
         assertEquals(nueva_reserva.getFechaReserva(), fechaReserva);
         assertEquals(nueva_reserva.getEstado(), estadoReserva);
+        assertEquals(nueva_reserva.getMontoTotal(), 100);
         assertEquals(nueva_reserva.getFactura(), factura);
         assertEquals(nueva_reserva.getHabitacion(), habitacion);
         assertEquals(nueva_reserva.getExtras(), listaExtras);
-
-
-        // assert gets
-
-
-
     }
 }

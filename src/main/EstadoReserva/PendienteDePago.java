@@ -1,5 +1,5 @@
 package main.EstadoReserva;
 
-public class PendienteDePago {
+public class PendienteDePago extends EstadoReserva{
 
 }
