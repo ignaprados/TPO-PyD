@@ -5,6 +5,11 @@ public class Extras {
 
     private ArrayList<Extra> listaExtras;
 
+    // Constructor
+    public Extras() {
+        listaExtras = new ArrayList<Extra>();
+    }
+
     //getters
     public ArrayList<Extra> getListaExtra() {
         return listaExtras;
