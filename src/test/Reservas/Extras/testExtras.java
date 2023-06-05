@@ -34,6 +34,7 @@ public class testExtras {
     public void testAgregarExtra() {
         ArrayList<Extra> listaExtras = extras.getListaExtra();
         Extra extra3 = new Extra(003,"Extra 3",800);
+
         extras.agregarExtra(extra3);
 
         assertTrue(listaExtras.contains(extra3));
@@ -43,9 +44,10 @@ public class testExtras {
 
     @Test
     public void testEliminarExtra() {
+        ArrayList<Extra> listaExtras = extras.getListaExtra();
+
         extras.eliminarExtra(extra1);
 
-        ArrayList<Extra> listaExtras = extras.getListaExtra();
         assertFalse(listaExtras.contains(extra1));
         assertTrue(listaExtras.contains(extra2));
     }

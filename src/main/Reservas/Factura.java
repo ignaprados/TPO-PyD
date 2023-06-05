@@ -4,15 +4,13 @@ public class Factura {
     private int nroFactura;
     private Double importe;
     private String tipoConsumidor;
-    private String CAE;
 
 
     //constructor
-    public Factura(int nroFactura, Double importe, String tipoConsumidor, String CAE) {
+    public Factura(int nroFactura, Double importe, String tipoConsumidor) {
         this.nroFactura = nroFactura;
         this.importe = importe;
         this.tipoConsumidor = tipoConsumidor;
-        this.CAE = CAE;
     }
 
     //getters y setters
@@ -33,12 +31,6 @@ public class Factura {
     }
     public void setTipoConsumidor(String tipoConsumidor) {
         this.tipoConsumidor = tipoConsumidor;
-    }
-    public String getCAE() {
-        return CAE;
-    }
-    public void setCAE(String CAE) {
-        this.CAE = CAE;
     }
 
 }

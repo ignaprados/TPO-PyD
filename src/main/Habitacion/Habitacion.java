@@ -9,12 +9,13 @@ public class Habitacion {
 
 
     // Constructor
-    public Habitacion(int cantPersonas, int nroHabitacion, boolean ocupada, Double precioBase) {
+    public Habitacion(int cantPersonas, int nroHabitacion, Boolean estado, double precioBase) {
         this.cantPersonas = cantPersonas;
         this.nroHabitacion = nroHabitacion;
-        this.ocupada = ocupada;
+        this.ocupada = estado;
         this.precioBase = precioBase;
     }
+
 
     // Getters
     public int getCantPersonas() {

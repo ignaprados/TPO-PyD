@@ -20,7 +20,7 @@ public class Cliente {
         this.contacto = contacto;
     }
 
-    //setter y getters
+    //setters
     public void setNombre(String nombre){
         this.nombre = nombre;
     }
@@ -45,6 +45,7 @@ public class Cliente {
         this.contacto = contacto;
     }
 
+    //getters
     public String getNombre(){
         return this.nombre;
     }

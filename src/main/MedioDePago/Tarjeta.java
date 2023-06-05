@@ -1,7 +1,7 @@
 package main.MedioDePago;
 import java.time.LocalDate;
 
-public class Tarjeta {
+public abstract class Tarjeta implements MedioDePago{
 
     private int CVV;
     private int numero;

@@ -1,12 +1,14 @@
 package main.Reservas;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import main.Clientes.Cliente;
 import main.EstadoReserva.EstadoReserva;
+import main.EstadoReserva.PendienteDePago;
+import main.Habitacion.Comun;
 import main.Habitacion.Habitacion;
 import main.MedioDePago.MedioDePago;
+import main.MedioDePago.TarjetaCredito;
 import main.Reservas.Extras.Extra;
 
 public class Reserva {
@@ -17,15 +19,14 @@ public class Reserva {
     private MedioDePago formaDePago;
     private LocalDate fechaReserva;
     private EstadoReserva estado;
-    private Double montoTotal;
-    private LocalDateTime fechaDeReserva;
+    private int montoTotal;
     private Factura factura;
     private Habitacion habitacion;
     private ArrayList<Extra> extras;
 
 
     //constructor
-    public Reserva(LocalDate checkIn, LocalDate checkOut, Cliente cliente, ArrayList<Cliente> listaCliente, MedioDePago formaDePago, LocalDate fechaReserva, EstadoReserva estado, Double montoTotal, LocalDateTime fechaDeReserva, Factura factura, Habitacion habitacion, ArrayList<Extra> extras) {
+    public Reserva(LocalDate checkIn, LocalDate checkOut, Cliente cliente, ArrayList<Cliente> listaCliente, MedioDePago formaDePago, LocalDate fechaReserva, EstadoReserva estado, int montoTotal, Factura factura, Habitacion habitacion, ArrayList<Extra> extras) {
         this.checkIn = checkIn;
         this.checkOut = checkOut;
         this.cliente = cliente;
@@ -34,12 +35,15 @@ public class Reserva {
         this.fechaReserva = fechaReserva;
         this.estado = estado;
         this.montoTotal = montoTotal;
-        this.fechaDeReserva = fechaDeReserva;
         this.factura = factura;
         this.habitacion = habitacion;
         this.extras = extras;
     }
-    //getters y setters 
+    public Reserva(LocalDate checkIn2, LocalDate checkOut2, Cliente cliente2, ArrayList<Cliente> listaClientes,
+			TarjetaCredito tarjetaCredito, LocalDate fechaReserva2, PendienteDePago estadoReserva, int montoTotal2,
+			Factura factura2, Comun habitacion2, ArrayList<Extra> listaExtras) {
+	}
+	//getters y setters
     public LocalDate getCheckIn() {
         return checkIn;
     }
@@ -82,17 +86,11 @@ public class Reserva {
     public void setEstado(EstadoReserva estado) {
         this.estado = estado;
     }
-    public Double getMontoTotal() {
+    public int getMontoTotal() {
         return montoTotal;
     }
-    public void setMontoTotal(Double montoTotal) {
+    public void setMontoTotal(int montoTotal) {
         this.montoTotal = montoTotal;
-    }
-    public LocalDateTime getFechaDeReserva() {
-        return fechaDeReserva;
-    }
-    public void setFechaDeReserva(LocalDateTime fechaDeReserva) {
-        this.fechaDeReserva = fechaDeReserva;
     }
     public Factura getFactura() {
         return factura;
@@ -112,7 +110,6 @@ public class Reserva {
     public void setExtras(ArrayList<Extra> extras) {
         this.extras = extras;
     }
-      
 }
 
 
