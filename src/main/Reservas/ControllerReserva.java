@@ -44,8 +44,8 @@ public class ControllerReserva {
     }
 
     //methods
-    public void crearReserva(LocalDate checkIn, LocalDate checkOut, Cliente cliente, ArrayList<Cliente> listaCliente, MedioDePago formaDePago, LocalDate fechaReserva, EstadoReserva estado, int montoTotal, Factura factura, Habitacion habitacion, ArrayList<Extra> extras){
-        Reserva nuevaReserva = new Reserva(checkIn, checkOut, cliente, listaCliente, formaDePago, fechaReserva, estado, montoTotal, factura, habitacion, extras);
+    public void crearReserva(LocalDate checkIn, LocalDate checkOut, Cliente cliente, ArrayList<Cliente> listaCliente, MedioDePago formaDePago, LocalDate fechaReserva, int montoTotal,  Habitacion habitacion, ArrayList<Extra> extras){
+        Reserva nuevaReserva = new Reserva(checkIn, checkOut, cliente, listaCliente, formaDePago, fechaReserva, montoTotal,  habitacion, extras);
         agregarReserva(nuevaReserva);
     }
 
