@@ -30,7 +30,6 @@ public class testControllerReserva {
     private TarjetaCredito tarjetaCredito;
     private Factura factura;
     private Comun habitacion;
-    private PendienteDePago estadoReserva;
     private ArrayList<Extra> listaExtras;
     private LocalDate checkIn;
     private LocalDate checkOut;
@@ -50,13 +49,12 @@ public class testControllerReserva {
         listaClientes.add(cliente);
 
         TarjetaCredito tarjetaCredito = new TarjetaCredito(123, 123456, "Tarjetita Anonima", LocalDate.of(2027, 04, 30));
-        PendienteDePago estadoReserva = new PendienteDePago();
         Factura factura = new Factura(1,99.99,"ConsumidorA");
         Comun habitacion = new Comun(2,1,false,99.99);
 
         ArrayList<Extra> listaExtras = new ArrayList<Extra>();
 
-        Reserva reserva = new Reserva(checkIn, checkOut, cliente, listaClientes, tarjetaCredito, fechaReserva, estadoReserva, 100, factura, habitacion, listaExtras);
+        Reserva reserva = new Reserva(checkIn, checkOut, cliente, listaClientes, tarjetaCredito, fechaReserva, 100, factura, habitacion, listaExtras);
     }
 
     @Test
@@ -83,7 +81,7 @@ public class testControllerReserva {
     public void testCrearReserva() {
         controller.setListaReservas(new ArrayList<Reserva>());
 
-        controller.crearReserva(checkIn, checkOut, cliente, listaClientes, tarjetaCredito, fechaReserva, estadoReserva, 100, factura, habitacion, listaExtras);
+        controller.crearReserva(checkIn, checkOut, cliente, listaClientes, tarjetaCredito, fechaReserva, 100, factura, habitacion, listaExtras);
 
         Reserva nueva_reserva = controller.getListaReservas().get(0);
 
@@ -93,7 +91,7 @@ public class testControllerReserva {
         assertEquals(nueva_reserva.getListaCliente(), listaClientes);
         assertEquals(nueva_reserva.getFormaDePago(), tarjetaCredito);
         assertEquals(nueva_reserva.getFechaReserva(), fechaReserva);
-        assertEquals(nueva_reserva.getEstado(), estadoReserva);
+        assertIsInstance(nueva_reserva.getEstado(), new PendienteDePago());
         assertEquals(nueva_reserva.getMontoTotal(), 100);
         assertEquals(nueva_reserva.getFactura(), factura);
         assertEquals(nueva_reserva.getHabitacion(), habitacion);

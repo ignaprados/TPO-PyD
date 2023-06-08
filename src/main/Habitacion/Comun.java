@@ -14,38 +14,6 @@ public class Comun extends Habitacion{
     }
 
 
-    // Getters
-    public int getCantPersonas() {
-        return cantPersonas;
-    }
 
-    public int getNroHabitacion() {
-        return nroHabitacion;
-    }
-
-    public boolean isOcupada() {
-        return ocupada;
-    }
-
-    public Double getPrecioBase() {
-        return precioBase;
-    }
-
-    // Setters
-    public void setCantPersonas(int cantPersonas) {
-        this.cantPersonas = cantPersonas;
-    }
-
-    public void setNroHabitacion(int nroHabitacion) {
-        this.nroHabitacion = nroHabitacion;
-    }
-
-    public void setOcupada(boolean ocupada) {
-        this.ocupada = ocupada;
-    }
-
-    public void setPrecioBase(Double precioBase) {
-        this.precioBase = precioBase;
-    }
 
 }

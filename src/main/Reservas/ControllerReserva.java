@@ -10,17 +10,28 @@ import main.Reservas.Extras.Extra;
 
 public class ControllerReserva {
     private ArrayList<Reserva> listaReservas;
+    private ArrayList<Factura> listaFacturas;
 
     //constructor
     public ControllerReserva() {
         this.listaReservas = new ArrayList<Reserva>();
+        this.listaFacturas = new ArrayList<Factura>();
     }
+
     //getters y setters
     public ArrayList<Reserva> getListaReservas() {
         return listaReservas;
     }
     public void setListaReservas(ArrayList<Reserva> listaReservas) {
         this.listaReservas = listaReservas;
+    }
+
+    public void setListaFacturas(ArrayList<Factura> listaFacturas){
+        this.listaFacturas = listaFacturas;
+    }
+
+    public ArrayList<Factura> getListaFacturas(){
+        return listaFacturas;
     }
 
      // CRUD Reservas

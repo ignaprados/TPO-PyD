@@ -2,15 +2,13 @@ package main.Reservas;
 
 public class Factura {
     private int nroFactura;
-    private Double importe;
-    private String tipoConsumidor;
+    private int importe;
 
 
     //constructor
-    public Factura(int nroFactura, Double importe, String tipoConsumidor) {
+    public Factura(int nroFactura, int importe) {
         this.nroFactura = nroFactura;
         this.importe = importe;
-        this.tipoConsumidor = tipoConsumidor;
     }
 
     //getters y setters
@@ -20,17 +18,11 @@ public class Factura {
     public void setNroFactura(int nroFactura) {
         this.nroFactura = nroFactura;
     }
-    public Double getImporte() {
+    public int getImporte() {
         return importe;
     }
-    public void setImporte(Double importe) {
+    public void setImporte(int importe) {
         this.importe = importe;
-    }
-    public String getTipoConsumidor() {
-        return tipoConsumidor;
-    }
-    public void setTipoConsumidor(String tipoConsumidor) {
-        this.tipoConsumidor = tipoConsumidor;
     }
 
 }
