@@ -1,5 +1,9 @@
 package main.MedioDePago;
 
-public class Efectivo {
+public class Efectivo implements MedioDePago{
+
+    public void pagar(int montoTotal){
+
+    }
 
 }

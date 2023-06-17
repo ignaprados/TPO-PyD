@@ -9,8 +9,9 @@ public class Comun extends Habitacion{
 
 
     // Constructor
-    public Comun(int cantPersonas, int nroHabitacion, boolean ocupada, Double precioBase) {
-        super(cantPersonas, nroHabitacion, ocupada, precioBase);
+    public Comun(int cantPersonas, int nroHabitacion,  Double precioBase) {
+        super(cantPersonas, nroHabitacion, precioBase);
+        this.precioBase = precioBase;
     }
 
 

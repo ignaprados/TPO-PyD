@@ -1,22 +1,22 @@
 package main.Descuentos;
 
 public class Descuento {
-    private float descuento;
+    private Double descuento;
 
     //constructor
-    public Descuento(float descuento) {
+    public Descuento(Double descuento) {
         this.descuento = descuento;
     }
 
 
     //getters
-    public float getDescuento() {
+    public Double getDescuento() {
         return descuento;
     }
 
 
     //setters
-    public void setDescuento(float descuento) {
+    public void setDescuento(Double descuento) {
         this.descuento = descuento;
     }
 

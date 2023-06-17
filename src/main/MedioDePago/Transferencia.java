@@ -11,7 +11,7 @@ public class Transferencia {
         this.nroComprobante = nroComprobante;
     }
 
-    //setter y getters
+    //setters
     public void setCBU(String CBU){
         this.CBU = CBU;
     }
@@ -20,11 +20,16 @@ public class Transferencia {
         this.nroComprobante = nroComprobante;
     }
 
+    //getters
     public String getCBU(){
         return this.CBU;
     }
 
     public String getNroComprobante(){
         return this.nroComprobante;
+    }
+
+    public void pagar(int montoTotal){
+
     }
 }

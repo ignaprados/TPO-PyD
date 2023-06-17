@@ -9,10 +9,10 @@ public class Habitacion {
 
 
     // Constructor
-    public Habitacion(int cantPersonas, int nroHabitacion, Boolean estado, double precioBase) {
+    public Habitacion(int cantPersonas, int nroHabitacion, double precioBase) {
         this.cantPersonas = cantPersonas;
         this.nroHabitacion = nroHabitacion;
-        this.ocupada = estado;
+        this.ocupada = false;
         this.precioBase = precioBase;
     }
 
@@ -49,6 +49,23 @@ public class Habitacion {
 
     public void setPrecioBase(Double precioBase) {
         this.precioBase = precioBase;
+    }
+
+    // Overriding equals() to compare two Habitaciones
+    @Override
+    public boolean equals(Object otraHabitacion) {
+
+        // If the object is compared with itself then return true
+        if (otraHabitacion == this) {
+            return true;
+        }
+        /* Check if o is an instance of Habitacion or not
+          "null instanceof [type]" also returns false */
+        if (!(otraHabitacion instanceof Habitacion)) {
+            return false;
+        }
+        Habitacion habitacion = (Habitacion) otraHabitacion;
+        return Integer.compare(nroHabitacion, habitacion.getNroHabitacion()) == 0;
     }
 
 }

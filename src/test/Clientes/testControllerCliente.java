@@ -23,7 +23,7 @@ public class testControllerCliente {
     public void setUp() {
         controller = new ControllerCliente();
 
-        cliente1 = new Cliente("Nombre1", "Apellido1", "32234221", "11-12345678", "mail1@gmail.com", "SMS");
+        cliente1 = new Cliente("Nombre1", "Apellido1", "12345678", "11-12345678", "mail1@gmail.com", "SMS");
         cliente2 = new Cliente("Nombre2", "Apellido2", "32324111", "11-12341234", "mail2@gmail.com", "WhatsApp");
 
         controller.agregarCliente(cliente1);
@@ -42,7 +42,7 @@ public class testControllerCliente {
     }
 
     @Test
-    public void testEliminarExtra() {
+    public void testEliminarCliente() {
         ArrayList<Cliente> listaClientes = controller.getListaClientes();
 
         controller.eliminarCliente(cliente1);
@@ -64,7 +64,28 @@ public class testControllerCliente {
         assertEquals(nuevo_cliente.getTelefono(), "telefono");
         assertEquals(nuevo_cliente.getMail(), "mail");
         assertEquals(nuevo_cliente.getContacto(), "medio de contacto");
-
-
     }
+
+    @Test
+    public void testCrearClienteRepetido() {
+        controller.setListaClientes(new ArrayList<Cliente>());
+        controller.crearCliente("nombre", "apellido", "DNI", "telefono", "mail", "medio de contacto");
+
+        controller.crearCliente("nombre2", "apellido2", "DNI", "telefono2", "mail2", "medio de contacto2");
+
+        assertEquals(controller.getListaClientes().size(), 1);
+    }
+
+    @Test
+    public void testClienteExiste() {
+        boolean existeCliente = controller.clienteExiste("12345678");
+        assertTrue(existeCliente);
+    }
+
+    @Test
+    public void testClienteExisteFalso() {
+        boolean existeCliente = controller.clienteExiste("dniRandom");
+        assertFalse(existeCliente);
+    }
+
 }

@@ -49,4 +49,8 @@ public abstract class Tarjeta implements MedioDePago{
         return this.fechaVto;
     }
 
+    public void pagar(int montoTotal){
+
+    }
+
 }

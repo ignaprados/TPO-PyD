@@ -9,8 +9,9 @@ public class Suite extends Habitacion {
 
 
     // Constructor
-    public Suite(int cantPersonas, int nroHabitacion, boolean ocupada, Double precioBase) {
-        super(cantPersonas, nroHabitacion, ocupada, precioBase);
+    public Suite(int cantPersonas, int nroHabitacion,  Double precioBase) {
+        super(cantPersonas, nroHabitacion, precioBase);
+        this.precioBase = precioBase;
     }
 
 }

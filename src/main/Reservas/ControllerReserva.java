@@ -46,7 +46,12 @@ public class ControllerReserva {
     //methods
     public void crearReserva(LocalDate checkIn, LocalDate checkOut, Cliente cliente, ArrayList<Cliente> listaCliente, MedioDePago formaDePago, LocalDate fechaReserva, int montoTotal,  Habitacion habitacion, ArrayList<Extra> extras){
         Reserva nuevaReserva = new Reserva(checkIn, checkOut, cliente, listaCliente, formaDePago, fechaReserva, montoTotal,  habitacion, extras);
+        habitacion.setOcupada(true);
         agregarReserva(nuevaReserva);
+    }
+
+    public void cancelarReserva(Reserva reserva) {
+        reserva.getEstado().cancelarReserva();
     }
 
 }
