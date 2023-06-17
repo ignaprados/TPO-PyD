@@ -3,7 +3,12 @@ package main.Clientes;
 public abstract class MedioDeContacto {
     private Medios medioDeContacto;
 
-
+    public enum Medios {
+        SMS,
+        WHATSAPP,
+        EMAIL
+    }
+    
     //constructor
     public MedioDeContacto(Medios medioDeContacto) {
         this.medioDeContacto = medioDeContacto;

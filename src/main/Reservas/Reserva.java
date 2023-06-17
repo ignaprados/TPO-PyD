@@ -114,9 +114,20 @@ public class Reserva {
         int cantFacturas = controllerReserva.get_listaFacturas().size();
         int nroFactura = cantFacturas + 1;
         Factura factura = new Factura(nroFactura, this.getMontoTotal());
+    }
 
+    public void calcMonto(){
 
+        int total = 0;
+        int totalExtras = 0;
+        for (Extra extra:extras){
+            totalExtras += extra.getPrecio();
+        }
 
+        total += totalExtras;
+        total += this.habitacion.getPrecioBase();
+
+        this.montoTotal = total;
     }
 }
 
