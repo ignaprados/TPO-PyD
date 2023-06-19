@@ -26,7 +26,7 @@ public class Reserva {
     private Habitacion habitacion;
     private ArrayList<Extra> extras;
     private boolean activa;
-    private LocalDateTime fechaHoraReserva; //horario en el que se realizó la reserva 
+    private LocalDateTime fechaHoraReserva; //horario en el que se realizó la reserva
 
     //constructor
     public Reserva(LocalDate checkIn, LocalDate checkOut, Cliente cliente, ArrayList<Cliente> listaCliente, MedioDePago formaDePago, LocalDate fechaReserva, int montoTotal,Habitacion habitacion, ArrayList<Extra> extras) {
