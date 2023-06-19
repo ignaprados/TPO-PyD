@@ -41,7 +41,7 @@ public class Reserva {
         this.habitacion = habitacion;
         this.extras = extras;
         this.activa = true;
-        this.fechaHoraReserva = LocalDateTime.now(); 
+        this.fechaHoraReserva = LocalDateTime.now();
     }
 
 	//getters
@@ -118,7 +118,7 @@ public class Reserva {
     public void setFechaHoraReserva(LocalDateTime fechaHoraReserva) {
         this.fechaHoraReserva = fechaHoraReserva;
     }
-    
+
     //methods
     public void crearFactura() {
         //usar singleton para el controller reserva
@@ -144,13 +144,17 @@ public class Reserva {
     }
 
     public void pagoExpirado(){
-        
-        LocalDateTime fechaHoraActual = LocalDateTime.now();
-        Duration diferencia = Duration.between(this.fechaHoraReserva, fechaHoraActual);
-        long horasPasadas = diferencia.toHours();
 
-        if (horasPasadas >= 24){
-            this.estado = new Cancelada(this);
+        if(this.estado instanceof PendienteDePago){
+
+            LocalDateTime fechaHoraActual = LocalDateTime.now();
+            Duration diferencia = Duration.between(this.fechaHoraReserva, fechaHoraActual);
+            long horasPasadas = diferencia.toHours();
+
+            if (horasPasadas >= 24){
+                this.estado = new Cancelada(this);
+            }
+
         }
     }
 }
