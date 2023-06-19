@@ -1,14 +1,18 @@
 package main.Reservas;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Duration;
 import java.util.ArrayList;
 
 import main.Clientes.Cliente;
+import main.EstadoReserva.Cancelada;
 import main.EstadoReserva.EstadoReserva;
 import main.EstadoReserva.PendienteDePago;
 import main.Habitacion.Habitacion;
 import main.MedioDePago.MedioDePago;
 import main.Reservas.Extras.Extra;
+
 
 public class Reserva {
     private LocalDate checkIn;
@@ -22,7 +26,7 @@ public class Reserva {
     private Habitacion habitacion;
     private ArrayList<Extra> extras;
     private boolean activa;
-
+    private LocalDateTime fechaHoraReserva; //horario en el que se realizó la reserva 
 
     //constructor
     public Reserva(LocalDate checkIn, LocalDate checkOut, Cliente cliente, ArrayList<Cliente> listaCliente, MedioDePago formaDePago, LocalDate fechaReserva, int montoTotal,Habitacion habitacion, ArrayList<Extra> extras) {
@@ -37,6 +41,7 @@ public class Reserva {
         this.habitacion = habitacion;
         this.extras = extras;
         this.activa = true;
+        this.fechaHoraReserva = LocalDateTime.now(); 
     }
 
 	//getters
@@ -73,7 +78,9 @@ public class Reserva {
     public boolean getActiva() {
         return this.activa;
     }
-
+    public LocalDateTime getFechaHoraReserva() {
+        return fechaHoraReserva;
+    }
     //setters
     public void setFormaDePago(MedioDePago formaDePago) {
         this.formaDePago = formaDePago;
@@ -108,7 +115,10 @@ public class Reserva {
     public void setActiva(boolean activa) {
         this.activa = activa;
     }
-
+    public void setFechaHoraReserva(LocalDateTime fechaHoraReserva) {
+        this.fechaHoraReserva = fechaHoraReserva;
+    }
+    
     //methods
     public void crearFactura() {
         //usar singleton para el controller reserva
@@ -131,5 +141,16 @@ public class Reserva {
         total += this.habitacion.getPrecioBase();
 
         this.montoTotal = total;
+    }
+
+    public void pagoExpirado(){
+        
+        LocalDateTime fechaHoraActual = LocalDateTime.now();
+        Duration diferencia = Duration.between(this.fechaHoraReserva, fechaHoraActual);
+        long horasPasadas = diferencia.toHours();
+
+        if (horasPasadas >= 24){
+            this.estado = new Cancelada(this);
+        }
     }
 }
