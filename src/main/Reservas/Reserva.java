@@ -1,4 +1,5 @@
 package main.Reservas;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -31,7 +32,7 @@ public class Reserva {
         this.listaCliente = listaCliente;
         this.formaDePago = formaDePago;
         this.fechaReserva = fechaReserva;
-        this.estado = new PendienteDePago();
+        this.estado = new PendienteDePago(this);
         this.montoTotal = montoTotal;
         this.habitacion = habitacion;
         this.extras = extras;
@@ -111,7 +112,9 @@ public class Reserva {
     //methods
     public void crearFactura() {
         //usar singleton para el controller reserva
-        int cantFacturas = controllerReserva.get_listaFacturas().size();
+        ControllerReserva controllerReserva = new ControllerReserva();
+
+        int cantFacturas = controllerReserva.getListaFacturas().size();
         int nroFactura = cantFacturas + 1;
         Factura factura = new Factura(nroFactura, this.getMontoTotal());
     }
@@ -130,5 +133,3 @@ public class Reserva {
         this.montoTotal = total;
     }
 }
-
-
