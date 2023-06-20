@@ -13,15 +13,13 @@ import static org.junit.Assert.*;
 // Import clases
 import main.Reservas.Reserva;
 import main.Reservas.ControllerReserva;
+import main.Reservas.Factura;
 import main.Clientes.Cliente;
 import main.EstadoReserva.Cancelada;
-import main.EstadoReserva.EstadoReserva;
 import main.EstadoReserva.PendienteDePago;
 import main.MedioDePago.TarjetaCredito;
 import main.Habitacion.Comun;
-import main.Reservas.Factura;
 import main.Reservas.Extras.Extra;
-
 
 public class testControllerReserva {
 
@@ -34,27 +32,24 @@ public class testControllerReserva {
     private ArrayList<Extra> listaExtras;
     private LocalDate checkIn;
     private LocalDate checkOut;
-    private LocalDate fechaReserva;
-
 
     @Before
     public void setUp() {
-        LocalDate checkIn = LocalDate.of(2023, 6, 4);
-        LocalDate checkOut = LocalDate.of(2023, 6, 8);
-        LocalDate fechaReserva = LocalDate.of(2023, 6, 2);
+        checkIn = LocalDate.of(2023, 6, 4);
+        checkOut = LocalDate.of(2023, 6, 8);
 
         controller = new ControllerReserva();
 
-        cliente = new Cliente ("Nombre", "Apellido", "DNI", "tel", "mail@gmail.com", "SMS");
-        ArrayList<Cliente> listaClientes = new ArrayList <Cliente>();
+        cliente = new Cliente("Nombre", "Apellido", "DNI", "tel", "mail@gmail.com", "SMS");
+        listaClientes = new ArrayList<Cliente>();
         listaClientes.add(cliente);
 
-        TarjetaCredito tarjetaCredito = new TarjetaCredito(123, 123456, "Tarjetita Anonima", LocalDate.of(2027, 04, 30));
-        Comun habitacion = new Comun(2,1,99.99);
+        tarjetaCredito = new TarjetaCredito(123, 123456, "Tarjetita Anonima", LocalDate.of(2027, 04, 30));
+        habitacion = new Comun(2, 1, 99.99);
 
-        ArrayList<Extra> listaExtras = new ArrayList<Extra>();
+        listaExtras = new ArrayList<Extra>();
 
-        Reserva reserva = new Reserva(checkIn, checkOut, cliente, listaClientes, tarjetaCredito, fechaReserva, 100, habitacion, listaExtras);
+        reserva = new Reserva(checkIn, checkOut, cliente, listaClientes, tarjetaCredito, 100, habitacion, listaExtras);
     }
 
     @Test
@@ -81,7 +76,8 @@ public class testControllerReserva {
     public void testCrearReserva() {
         controller.setListaReservas(new ArrayList<Reserva>());
 
-        controller.crearReserva(checkIn, checkOut, cliente, listaClientes, tarjetaCredito, fechaReserva, 100, habitacion, listaExtras);
+        controller.crearReserva(checkIn, checkOut, cliente, listaClientes, tarjetaCredito, 100, habitacion,
+                listaExtras);
 
         Reserva nueva_reserva = controller.getListaReservas().get(0);
 
@@ -90,7 +86,6 @@ public class testControllerReserva {
         assertEquals(nueva_reserva.getCliente(), cliente);
         assertEquals(nueva_reserva.getListaCliente(), listaClientes);
         assertEquals(nueva_reserva.getFormaDePago(), tarjetaCredito);
-        assertEquals(nueva_reserva.getFechaReserva(), fechaReserva);
         assertTrue(nueva_reserva.getEstado() instanceof PendienteDePago);
         assertEquals(nueva_reserva.getMontoTotal(), 100);
         assertEquals(nueva_reserva.getHabitacion(), habitacion);
@@ -102,5 +97,22 @@ public class testControllerReserva {
     public void testCancelarReserva() {
         controller.cancelarReserva(reserva);
         assertTrue(reserva.getEstado() instanceof Cancelada);
+    }
+
+    @Test
+    public void testAgregarFactura() {
+        controller.agregarFactura(new Factura(100, 300));
+        controller.agregarFactura(new Factura(101, 500));
+        assertEquals(controller.getListaFacturas().size(), 2);
+    }
+
+    @Test
+    public void testEliminarFactura() {
+        Factura factura1 = new Factura(102, 400);
+        controller.agregarFactura(new Factura(100, 300));
+        controller.agregarFactura(new Factura(101, 500));
+        controller.agregarFactura(factura1);
+        controller.eliminarFactura(factura1);
+        assertEquals(controller.getListaFacturas().size(), 2);
     }
 }

@@ -3,7 +3,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import main.Clientes.Cliente;
-import main.EstadoReserva.EstadoReserva;
 import main.Habitacion.Habitacion;
 import main.MedioDePago.MedioDePago;
 import main.Reservas.Extras.Extra;
@@ -43,9 +42,17 @@ public class ControllerReserva {
         listaReservas.remove(Reserva);
     }
 
+    public void agregarFactura(Factura nuevaFactura) {
+        listaFacturas.add(nuevaFactura);
+    }
+
+    public void eliminarFactura(Factura Factura){
+        listaFacturas.remove(Factura);
+    }
+
     //methods
-    public void crearReserva(LocalDate checkIn, LocalDate checkOut, Cliente cliente, ArrayList<Cliente> listaCliente, MedioDePago formaDePago, LocalDate fechaReserva, int montoTotal,  Habitacion habitacion, ArrayList<Extra> extras){
-        Reserva nuevaReserva = new Reserva(checkIn, checkOut, cliente, listaCliente, formaDePago, fechaReserva, montoTotal,  habitacion, extras);
+    public void crearReserva(LocalDate checkIn, LocalDate checkOut, Cliente cliente, ArrayList<Cliente> listaCliente, MedioDePago formaDePago,  int montoTotal,  Habitacion habitacion, ArrayList<Extra> extras){
+        Reserva nuevaReserva = new Reserva(checkIn, checkOut, cliente, listaCliente, formaDePago,  montoTotal, habitacion, extras);
         habitacion.setOcupada(true);
         agregarReserva(nuevaReserva);
     }

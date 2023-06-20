@@ -1,23 +1,25 @@
 package main.Descuentos;
 
-public class Descuento {
+public abstract class Descuento {
     private Double descuento;
 
-    //constructor
-    public Descuento(Double descuento) {
-        this.descuento = descuento;
+    // constructor
+    public Descuento() {
     }
 
-
-    //getters
+    // getters
     public Double getDescuento() {
         return descuento;
     }
 
-
-    //setters
+    // setters
     public void setDescuento(Double descuento) {
         this.descuento = descuento;
     }
 
+    // methods
+    public Double calcularPrecio(Double monto) {
+        Double precioFinal = monto * this.descuento;
+        return precioFinal;
+    }
 }

@@ -2,16 +2,16 @@ package main.Reservas;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Duration;
 import java.util.ArrayList;
 
 import main.Clientes.Cliente;
-import main.EstadoReserva.Cancelada;
 import main.EstadoReserva.EstadoReserva;
 import main.EstadoReserva.PendienteDePago;
 import main.Habitacion.Habitacion;
 import main.MedioDePago.MedioDePago;
 import main.Reservas.Extras.Extra;
+import main.Descuentos.Descuento;
+import main.Descuentos.SinDesc;
 
 
 public class Reserva {
@@ -20,28 +20,29 @@ public class Reserva {
     private Cliente cliente;
     private ArrayList<Cliente> listaCliente;
     private MedioDePago formaDePago;
-    private LocalDate fechaReserva;
+    private LocalDateTime fechaReserva; //fecha y horario en el que se realizó la reserva
     private EstadoReserva estado;
     private int montoTotal;
     private Habitacion habitacion;
     private ArrayList<Extra> extras;
     private boolean activa;
-    private LocalDateTime fechaHoraReserva; //horario en el que se realizó la reserva
+    private Descuento descuento;
 
     //constructor
-    public Reserva(LocalDate checkIn, LocalDate checkOut, Cliente cliente, ArrayList<Cliente> listaCliente, MedioDePago formaDePago, LocalDate fechaReserva, int montoTotal,Habitacion habitacion, ArrayList<Extra> extras) {
+    public Reserva(LocalDate checkIn, LocalDate checkOut, Cliente cliente, ArrayList<Cliente> listaCliente, MedioDePago formaDePago,  int montoTotal,Habitacion habitacion, ArrayList<Extra> extras) {
         this.checkIn = checkIn;
         this.checkOut = checkOut;
         this.cliente = cliente;
         this.listaCliente = listaCliente;
         this.formaDePago = formaDePago;
-        this.fechaReserva = fechaReserva;
+        this.fechaReserva = LocalDateTime.now();
         this.estado = new PendienteDePago(this);
         this.montoTotal = montoTotal;
         this.habitacion = habitacion;
         this.extras = extras;
         this.activa = true;
-        this.fechaHoraReserva = LocalDateTime.now();
+        this.descuento = new SinDesc();
+
     }
 
 	//getters
@@ -60,7 +61,7 @@ public class Reserva {
     public MedioDePago getFormaDePago() {
         return formaDePago;
     }
-    public LocalDate getFechaReserva() {
+    public LocalDateTime getFechaReserva() {
         return fechaReserva;
     }
     public EstadoReserva getEstado() {
@@ -78,9 +79,7 @@ public class Reserva {
     public boolean getActiva() {
         return this.activa;
     }
-    public LocalDateTime getFechaHoraReserva() {
-        return fechaHoraReserva;
-    }
+
     //setters
     public void setFormaDePago(MedioDePago formaDePago) {
         this.formaDePago = formaDePago;
@@ -97,9 +96,6 @@ public class Reserva {
     public void setCliente(Cliente cliente) {
         this.cliente= cliente;
     }
-    public void setFechaReserva(LocalDate fechaReserva) {
-        this.fechaReserva = fechaReserva;
-    }
     public void setEstado(EstadoReserva estado) {
         this.estado = estado;
     }
@@ -115,9 +111,6 @@ public class Reserva {
     public void setActiva(boolean activa) {
         this.activa = activa;
     }
-    public void setFechaHoraReserva(LocalDateTime fechaHoraReserva) {
-        this.fechaHoraReserva = fechaHoraReserva;
-    }
 
     //methods
     public void crearFactura() {
@@ -126,7 +119,8 @@ public class Reserva {
 
         int cantFacturas = controllerReserva.getListaFacturas().size();
         int nroFactura = cantFacturas + 1;
-        Factura factura = new Factura(nroFactura, this.getMontoTotal());
+        Factura nuevaFactura = new Factura(nroFactura, this.getMontoTotal());
+        controllerReserva.agregarFactura(nuevaFactura);
     }
 
     public void calcMonto(){
@@ -142,19 +136,7 @@ public class Reserva {
 
         this.montoTotal = total;
     }
-
-    public void pagoExpirado(){
-
-        if(this.estado instanceof PendienteDePago){
-
-            LocalDateTime fechaHoraActual = LocalDateTime.now();
-            Duration diferencia = Duration.between(this.fechaHoraReserva, fechaHoraActual);
-            long horasPasadas = diferencia.toHours();
-
-            if (horasPasadas >= 24){
-                this.estado = new Cancelada(this);
-            }
-
-        }
-    }
+    
+    
+    
 }

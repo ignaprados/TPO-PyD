@@ -1,6 +1,6 @@
 package main.Habitacion;
 
-public class Habitacion {
+public abstract class Habitacion {
 
     private int cantPersonas;
     private int nroHabitacion;
