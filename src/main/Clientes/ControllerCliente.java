@@ -8,11 +8,23 @@ public class ControllerCliente {
 
     private ArrayList<Cliente> listaClientes;
 
+    private static ControllerCliente instancia;
+
 
     //constructor
-    public ControllerCliente(){
+    private ControllerCliente(){
         listaClientes = new ArrayList<Cliente>();
     }
+
+    //singleton
+    public static ControllerCliente getInstance(){
+        if(instancia == null){
+            instancia = new ControllerCliente();
+        }
+
+        return instancia;
+    }
+    
     //setters
     public void setListaClientes(ArrayList<Cliente> listaClientes){
         this.listaClientes = listaClientes;

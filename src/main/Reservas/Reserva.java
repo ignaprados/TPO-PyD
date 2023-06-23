@@ -23,6 +23,7 @@ public class Reserva {
     private LocalDateTime fechaReserva; //fecha y horario en el que se realizó la reserva
     private EstadoReserva estado;
     private int montoTotal;
+    private Factura factura = null;
     private Habitacion habitacion;
     private ArrayList<Extra> extras;
     private boolean activa;
@@ -121,6 +122,7 @@ public class Reserva {
         int nroFactura = cantFacturas + 1;
         Factura nuevaFactura = new Factura(nroFactura, this.getMontoTotal());
         controllerReserva.agregarFactura(nuevaFactura);
+        this.factura = nuevaFactura;
     }
 
     public void calcMonto(){

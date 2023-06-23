@@ -17,8 +17,12 @@ public class AppMensajeria {
 
 
     //setters
-    public void setMedio(MedioDeContacto medio) {
+    public void setMedioDeContacto(MedioDeContacto medio) {
         this.medio = medio;
+    }
+
+    public void enviarNotificacion(String mensaje, Cliente cliente){
+        MedioDeContacto.enviarNotificacion(mensaje, cliente.getMedioDeContacto())
     }
 
 }

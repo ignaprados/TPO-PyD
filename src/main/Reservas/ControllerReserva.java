@@ -11,10 +11,21 @@ public class ControllerReserva {
     private ArrayList<Reserva> listaReservas;
     private ArrayList<Factura> listaFacturas;
 
+    private static ControllerReserva instancia;
+
     //constructor
-    public ControllerReserva() {
+    private ControllerReserva() {
         this.listaReservas = new ArrayList<Reserva>();
         this.listaFacturas = new ArrayList<Factura>();
+    }
+
+    //singleton
+    public static ControllerReserva getInstance(){
+        if(instancia == null){
+            instancia = new ControllerReserva();
+        }
+
+        return instancia;
     }
 
     //getters y setters

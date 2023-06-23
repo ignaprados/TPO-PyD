@@ -13,9 +13,20 @@ public class Sistema {
     private ArrayList<Habitacion> listaHabitaciones;
     private CronJobPagoExpirado cronJobPagoExpirado;
 
+    private static Sistema instancia;
+
     //contructor
-    public Sistema(){
+    private Sistema(){
         listaHabitaciones = new ArrayList<Habitacion>();
+    }
+
+    //singleton
+    public static Sistema getInstance(){
+        if(instancia == null){
+            instancia = new Sistema();
+        }
+
+        return instancia;
     }
 
     //getters

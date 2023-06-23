@@ -45,6 +45,12 @@ public class TarjetaDebito extends Tarjeta {
         return this.fechaVto;
     }
 
+    //métodos
+    public void pagar(Reserva reserva){
+        reserva.setEstado(new Pagada(reserva));
+        Factura factura = reserva.crearFactura();
+    }
+
 
 
 }
