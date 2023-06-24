@@ -7,13 +7,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import main.Clientes.Cliente;
+import main.Clientes.MedioDeContacto.Medios;
 import main.Habitacion.Comun;
 import main.Habitacion.Habitacion;
 import main.Habitacion.Suite;
-import main.MedioDePago.Efectivo;
 import main.MedioDePago.MedioDePago;
-import main.MedioDePago.Tarjeta;
-import main.MedioDePago.Transferencia;
 import main.Reservas.Reserva;
 import main.Reservas.Extras.Extra;
 import test.Reservas.Extras.mockMedioDePago;
@@ -39,8 +37,8 @@ public class testReserva {
     @Before
     public void setUp() {
 
-        cliente1 = new Cliente("Nombre1", "Apellido1", "12345678", "11-12345678", "mail1@gmail.com", "SMS");
-        cliente2 = new Cliente("Nombre2", "Apellido2", "32324111", "11-12341234", "mail2@gmail.com", "WhatsApp");
+        cliente1 = new Cliente("Nombre1", "Apellido1", "12345678", "11-12345678", "mail1@gmail.com", Medios.SMS);
+        cliente2 = new Cliente("Nombre2", "Apellido2", "32324111", "11-12341234", "mail2@gmail.com", Medios.WHATSAPP);
 
         listaClientesReserva1 = new ArrayList<Cliente>();
         listaClientesReserva1.add(cliente1);
@@ -70,6 +68,4 @@ public class testReserva {
                 mockMedioDePago, 0, habitacionReserva2, extrasReserva2);
     }
 
-    @Test
-    public void test
 }
