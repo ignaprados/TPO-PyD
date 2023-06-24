@@ -45,7 +45,7 @@ public class testControllerReserva {
         listaClientes = new ArrayList<Cliente>();
         listaClientes.add(cliente);
 
-        tarjetaCredito = new TarjetaCredito(123, 123456, "Tarjetita Anonima", LocalDate.of(2027, 04, 30));
+        tarjetaCredito = new TarjetaCredito(123, 123456, "Tarjetita Anonima", LocalDate.of(2027, 04, 30), 12);
         habitacion = new Comun(2, 1, 99.99);
 
         listaExtras = new ArrayList<Extra>();

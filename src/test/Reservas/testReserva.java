@@ -1,5 +1,7 @@
 package test.Reservas;
 
+import static org.junit.Assert.assertEquals;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -12,6 +14,8 @@ import main.Habitacion.Comun;
 import main.Habitacion.Habitacion;
 import main.Habitacion.Suite;
 import main.MedioDePago.MedioDePago;
+import main.Reservas.ControllerReserva;
+import main.Reservas.Factura;
 import main.Reservas.Reserva;
 import main.Reservas.Extras.Extra;
 import test.Reservas.Extras.mockMedioDePago;
@@ -32,7 +36,7 @@ public class testReserva {
     private MedioDePago mockMedioDePago;
 
     /**
-     * 
+     *
      */
     @Before
     public void setUp() {
@@ -68,4 +72,24 @@ public class testReserva {
                 mockMedioDePago, 0, habitacionReserva2, extrasReserva2);
     }
 
+    @Test
+    public void testCancelarReserva() {
+        reserva1.cancelarReserva();
+        assertEquals(reserva1.getActiva(), false);
+    }
+
+    @Test
+    public void testCrearFactura() {
+        ControllerReserva controller = ControllerReserva.getInstance();
+
+        ArrayList<Factura> facturas = controller.getListaFacturas();
+        int cantFacturas = facturas.size();
+
+        assertEquals(cantFacturas, reserva1.getFactura().getNroFactura());
+    }
+
+    @Test
+    public void testCalcMonto() {
+        assertEquals(reserva1.calcMonto(), 15690.0 + 500 + 7)
+    }
 }

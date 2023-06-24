@@ -106,4 +106,14 @@ public class testSistema {
         Habitacion habitacion = sistema.buscarHabitacion(231);
         assertEquals(habitacion, null);
     }
+
+    @Test
+    public void testImprimirReporteOcupadas() {
+
+    }
+
+    @Test
+    public void testImprimirReporteLibres() {
+
+    }
 }
