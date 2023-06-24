@@ -4,34 +4,35 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import main.Clientes.MedioDeContacto.Medios;
+
 public class ControllerCliente {
 
     private ArrayList<Cliente> listaClientes;
 
     private static ControllerCliente instancia;
 
-
-    //constructor
-    private ControllerCliente(){
+    // constructor
+    private ControllerCliente() {
         listaClientes = new ArrayList<Cliente>();
     }
 
-    //singleton
-    public static ControllerCliente getInstance(){
-        if(instancia == null){
+    // singleton
+    public static ControllerCliente getInstance() {
+        if (instancia == null) {
             instancia = new ControllerCliente();
         }
 
         return instancia;
     }
-    
-    //setters
-    public void setListaClientes(ArrayList<Cliente> listaClientes){
+
+    // setters
+    public void setListaClientes(ArrayList<Cliente> listaClientes) {
         this.listaClientes = listaClientes;
     }
 
-    //getters
-    public ArrayList<Cliente> getListaClientes(){
+    // getters
+    public ArrayList<Cliente> getListaClientes() {
         return this.listaClientes;
     }
 
@@ -47,16 +48,17 @@ public class ControllerCliente {
         listaClientes.remove(cliente);
     }
 
-    //methods
-    public void crearCliente(String nombre, String apellido, String dni, String telefono, String mail, String medioContacto){
+    // methods
+    public void crearCliente(String nombre, String apellido, String dni, String telefono, String mail,
+            Medios medioContacto) {
         Cliente nuevoCliente = new Cliente(nombre, apellido, dni, telefono, mail, medioContacto);
         agregarCliente(nuevoCliente);
     }
 
-    public boolean clienteExiste(String DNI){
+    public boolean clienteExiste(String DNI) {
         List<Cliente> listaClienteFiltrada = listaClientes.stream()
-        .filter(c -> c.getDNI() == DNI)
-        .collect(Collectors.toList());
+                .filter(c -> c.getDNI() == DNI)
+                .collect(Collectors.toList());
         if (listaClienteFiltrada.size() > 0)
             return true;
         return false;

@@ -15,6 +15,7 @@ import main.Reservas.Reserva;
 import main.Reservas.ControllerReserva;
 import main.Reservas.Factura;
 import main.Clientes.Cliente;
+import main.Clientes.MedioDeContacto.Medios;
 import main.EstadoReserva.Cancelada;
 import main.EstadoReserva.PendienteDePago;
 import main.MedioDePago.TarjetaCredito;
@@ -38,9 +39,9 @@ public class testControllerReserva {
         checkIn = LocalDate.of(2023, 6, 4);
         checkOut = LocalDate.of(2023, 6, 8);
 
-        controller = new ControllerReserva();
+        controller = ControllerReserva.getInstance();
 
-        cliente = new Cliente("Nombre", "Apellido", "DNI", "tel", "mail@gmail.com", "SMS");
+        cliente = new Cliente("Nombre", "Apellido", "DNI", "tel", "mail@gmail.com", Medios.SMS);
         listaClientes = new ArrayList<Cliente>();
         listaClientes.add(cliente);
 

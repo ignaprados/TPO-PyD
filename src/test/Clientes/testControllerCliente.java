@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 // Import clases
 import main.Clientes.Cliente;
 import main.Clientes.ControllerCliente;
-
+import main.Clientes.MedioDeContacto.Medios;
 
 public class testControllerCliente {
 
@@ -21,10 +21,10 @@ public class testControllerCliente {
 
     @Before
     public void setUp() {
-        controller = new ControllerCliente();
+        controller = ControllerCliente.getInstance();
 
-        cliente1 = new Cliente("Nombre1", "Apellido1", "12345678", "11-12345678", "mail1@gmail.com", "SMS");
-        cliente2 = new Cliente("Nombre2", "Apellido2", "32324111", "11-12341234", "mail2@gmail.com", "WhatsApp");
+        cliente1 = new Cliente("Nombre1", "Apellido1", "12345678", "11-12345678", "mail1@gmail.com", Medios.SMS);
+        cliente2 = new Cliente("Nombre2", "Apellido2", "32324111", "11-12341234", "mail2@gmail.com", Medios.WHATSAPP);
 
         controller.agregarCliente(cliente1);
         controller.agregarCliente(cliente2);
@@ -33,7 +33,8 @@ public class testControllerCliente {
     @Test
     public void testAgregarCliente() {
         ArrayList<Cliente> listaClientes = controller.getListaClientes();
-        Cliente cliente3 = new Cliente("Nombre3", "Apellido3", "32234221", "11-12345678", "mail3@gmail.com", "SMS");
+        Cliente cliente3 = new Cliente("Nombre3", "Apellido3", "32234221", "11-12345678", "mail3@gmail.com",
+                Medios.SMS);
 
         controller.agregarCliente(cliente3);
 
@@ -54,7 +55,7 @@ public class testControllerCliente {
     @Test
     public void testCrearCliente() {
         controller.setListaClientes(new ArrayList<Cliente>());
-        controller.crearCliente("nombre", "apellido", "DNI", "telefono", "mail", "medio de contacto");
+        controller.crearCliente("nombre", "apellido", "DNI", "telefono", "mail", Medios.EMAIL);
 
         Cliente nuevo_cliente = controller.getListaClientes().get(0);
 
@@ -63,15 +64,15 @@ public class testControllerCliente {
         assertEquals(nuevo_cliente.getDNI(), "DNI");
         assertEquals(nuevo_cliente.getTelefono(), "telefono");
         assertEquals(nuevo_cliente.getMail(), "mail");
-        assertEquals(nuevo_cliente.getContacto(), "medio de contacto");
+        assertEquals(nuevo_cliente.getContacto(), Medios.EMAIL);
     }
 
     @Test
     public void testCrearClienteRepetido() {
         controller.setListaClientes(new ArrayList<Cliente>());
-        controller.crearCliente("nombre", "apellido", "DNI", "telefono", "mail", "medio de contacto");
+        controller.crearCliente("nombre", "apellido", "DNI", "telefono", "mail", Medios.EMAIL);
 
-        controller.crearCliente("nombre2", "apellido2", "DNI", "telefono2", "mail2", "medio de contacto2");
+        controller.crearCliente("nombre2", "apellido2", "DNI", "telefono2", "mail2", Medios.SMS);
 
         assertEquals(controller.getListaClientes().size(), 1);
     }

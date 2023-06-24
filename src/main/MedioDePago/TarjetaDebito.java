@@ -1,5 +1,10 @@
 package main.MedioDePago;
+
 import java.time.LocalDate;
+
+import main.EstadoReserva.Pagada;
+import main.Reservas.Reserva;
+
 public class TarjetaDebito extends Tarjeta {
 
     private int CVV;
@@ -7,50 +12,48 @@ public class TarjetaDebito extends Tarjeta {
     private String nombre;
     private LocalDate fechaVto;
 
-    //Constructor heredado
-    public TarjetaDebito(int CVV, int numero, String nombre, LocalDate fechaVto){
-        super(CVV,numero,nombre, fechaVto);
+    // Constructor heredado
+    public TarjetaDebito(int CVV, int numero, String nombre, LocalDate fechaVto) {
+        super(CVV, numero, nombre, fechaVto);
     }
 
-    //setters y getters
-    public void setCVV(int CVV){
+    // setters y getters
+    public void setCVV(int CVV) {
         this.CVV = CVV;
     }
 
-    public void setNumero(int numero){
+    public void setNumero(int numero) {
         this.numero = numero;
     }
 
-    public void setNombre(String nombre){
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public void setFechaVto(LocalDate fecha){
+    public void setFechaVto(LocalDate fecha) {
         this.fechaVto = fecha;
     }
 
-    public int getCVV(){
+    public int getCVV() {
         return this.CVV;
     }
 
-    public int getNumero(){
+    public int getNumero() {
         return this.numero;
     }
 
-    public String nombre(){
+    public String nombre() {
         return this.nombre;
     }
 
-    public LocalDate getFechaVto(){
+    public LocalDate getFechaVto() {
         return this.fechaVto;
     }
 
-    //métodos
-    public void pagar(Reserva reserva){
+    // métodos
+    public void pagar(Reserva reserva) {
         reserva.setEstado(new Pagada(reserva));
-        Factura factura = reserva.crearFactura();
+        reserva.crearFactura();
     }
-
-
 
 }

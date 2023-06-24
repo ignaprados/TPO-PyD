@@ -1,10 +1,13 @@
 package main.MedioDePago;
 
+import main.EstadoReserva.Pagada;
+import main.Reservas.Reserva;
+
 public class AdaptadorMercadoPago {
 
-    public void pagarReserva(Reserva reserva){
+    public void pagarReserva(Reserva reserva) {
         reserva.setEstado(new Pagada(reserva));
-        Factura factura = reserva.crearFactura();
+        reserva.crearFactura();
     }
 
 }

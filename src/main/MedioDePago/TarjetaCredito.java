@@ -1,61 +1,65 @@
 package main.MedioDePago;
+
 import java.time.LocalDate;
+
+import main.EstadoReserva.Pagada;
+import main.Reservas.Reserva;
 
 public class TarjetaCredito extends Tarjeta {
 
     private int cantCuotas;
 
-    //constructor heredado
+    // constructor heredado
     public TarjetaCredito(int CVV, int numero, String nombre, LocalDate fechaVto, int cuotas) {
         super(CVV, numero, nombre, fechaVto);
         this.cantCuotas = cuotas;
     }
 
-    //setters y getters
-    public void setCVV(int CVV){
+    // setters y getters
+    public void setCVV(int CVV) {
         this.CVV = CVV;
     }
 
-    public void setNumero(int numero){
+    public void setNumero(int numero) {
         this.numero = numero;
     }
 
-    public void setNombre(String nombre){
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public void setFechaVto(LocalDate fecha){
+    public void setFechaVto(LocalDate fecha) {
         this.fechaVto = fecha;
     }
 
-    public void setCantCuotas(int cuotas){
+    public void setCantCuotas(int cuotas) {
         this.cantCuotas = cuotas;
     }
 
-    public int getCVV(){
+    public int getCVV() {
         return this.CVV;
     }
 
-    public int getNumero(){
+    public int getNumero() {
         return this.numero;
     }
 
-    public String nombre(){
+    public String nombre() {
         return this.nombre;
     }
 
-    public LocalDate getFechaVto(){
+    public LocalDate getFechaVto() {
         return this.fechaVto;
     }
 
-    public int getCantCuotas(){
+    public int getCantCuotas() {
         return this.cantCuotas;
     }
 
-    //métodos
-    public void pagar(Reserva reserva){
+    // métodos
+    public void pagar(Reserva reserva) {
         reserva.setEstado(new Pagada(reserva));
-        Factura factura = reserva.crearFactura();
+        reserva.crearFactura();
     }
 
 }

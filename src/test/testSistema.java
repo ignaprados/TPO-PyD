@@ -20,7 +20,7 @@ public class testSistema {
 
     @Before
     public void setUp() {
-        sistema = new Sistema();
+        sistema = Sistema.getInstance();
 
         habitacionComun = new Comun(2, 100, 499.99);
         habitacionSuite = new Suite(2, 101, 499.99);

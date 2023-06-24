@@ -2,7 +2,7 @@ package main.EstadoReserva;
 
 import main.Reservas.Reserva;
 
-public class PendienteDePago extends EstadoReserva{
+public class PendienteDePago extends EstadoReserva {
 
     public PendienteDePago(Reserva reserva) {
         super(reserva);
@@ -10,12 +10,12 @@ public class PendienteDePago extends EstadoReserva{
 
     public void pagarReserva() {
         this.reserva.crearFactura();
-        this.reserva.getFormaDePago().pagar(this.reserva.getMontoTotal());
+        this.reserva.getFormaDePago().pagar(this.reserva);
         this.reserva.setEstado(new Pagada(reserva));
     }
 
     public void cancelarReserva() {
-       this.reserva.setEstado(new Cancelada(reserva));
-       this.reserva.setActiva(false);
+        this.reserva.setEstado(new Cancelada(reserva));
+        this.reserva.setActiva(false);
     }
 }

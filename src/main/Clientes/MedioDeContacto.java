@@ -8,28 +8,28 @@ public abstract class MedioDeContacto {
         WHATSAPP,
         EMAIL
     }
-    
-    //constructor
+
+    // constructor
     public MedioDeContacto(Medios medioDeContacto) {
         this.medioDeContacto = medioDeContacto;
     }
 
-    //getters
+    // getters
     public Medios getMedioDeContacto() {
         return medioDeContacto;
     }
 
-    //setters
+    // setters
     public void setMedioDeContacto(Medios medioDeContacto) {
         this.medioDeContacto = medioDeContacto;
     }
 
-    public final void enviarMensaje(String mensaje, MedioDeContacto medio){
+    public static void enviarMensaje(String mensaje, Medios medio) {
         switch (medio) {
             case SMS:
                 System.out.println("Enviando por SMS el siguiente mensaje:" + mensaje);
                 break;
-            
+
             case WHATSAPP:
                 System.out.println("Enviando por Whatsapp el siguiente mensaje:" + mensaje);
                 break;

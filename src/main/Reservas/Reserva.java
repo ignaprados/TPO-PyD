@@ -5,7 +5,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import main.Clientes.Cliente;
+import main.EstadoReserva.Cancelada;
 import main.EstadoReserva.EstadoReserva;
+import main.EstadoReserva.Pagada;
 import main.EstadoReserva.PendienteDePago;
 import main.Habitacion.Habitacion;
 import main.MedioDePago.MedioDePago;
@@ -13,14 +15,13 @@ import main.Reservas.Extras.Extra;
 import main.Descuentos.Descuento;
 import main.Descuentos.SinDesc;
 
-
 public class Reserva {
     private LocalDate checkIn;
     private LocalDate checkOut;
     private Cliente cliente;
     private ArrayList<Cliente> listaCliente;
     private MedioDePago formaDePago;
-    private LocalDateTime fechaReserva; //fecha y horario en el que se realizó la reserva
+    private LocalDateTime fechaReserva; // fecha y horario en el que se realizó la reserva
     private EstadoReserva estado;
     private int montoTotal;
     private Factura factura = null;
@@ -29,8 +30,9 @@ public class Reserva {
     private boolean activa;
     private Descuento descuento;
 
-    //constructor
-    public Reserva(LocalDate checkIn, LocalDate checkOut, Cliente cliente, ArrayList<Cliente> listaCliente, MedioDePago formaDePago,  int montoTotal,Habitacion habitacion, ArrayList<Extra> extras) {
+    // constructor
+    public Reserva(LocalDate checkIn, LocalDate checkOut, Cliente cliente, ArrayList<Cliente> listaCliente,
+            MedioDePago formaDePago, int montoTotal, Habitacion habitacion, ArrayList<Extra> extras) {
         this.checkIn = checkIn;
         this.checkOut = checkOut;
         this.cliente = cliente;
@@ -46,77 +48,122 @@ public class Reserva {
 
     }
 
-	//getters
+    // getters
     public LocalDate getCheckIn() {
         return checkIn;
     }
+
     public LocalDate getCheckOut() {
         return checkOut;
     }
+
     public Cliente getCliente() {
         return cliente;
     }
+
     public ArrayList<Cliente> getListaCliente() {
         return listaCliente;
     }
+
     public MedioDePago getFormaDePago() {
         return formaDePago;
     }
+
     public LocalDateTime getFechaReserva() {
         return fechaReserva;
     }
+
     public EstadoReserva getEstado() {
         return estado;
     }
+
     public int getMontoTotal() {
         return montoTotal;
     }
+
+    public Factura getFactura() {
+        return this.factura;
+    }
+
     public Habitacion getHabitacion() {
         return habitacion;
     }
+
     public ArrayList<Extra> getExtras() {
         return extras;
     }
+
     public boolean getActiva() {
         return this.activa;
     }
 
-    //setters
+    public Descuento getDescuento() {
+        return this.descuento;
+    }
+
+    // setters
     public void setFormaDePago(MedioDePago formaDePago) {
         this.formaDePago = formaDePago;
     }
+
     public void setListaCliente(ArrayList<Cliente> listaCliente) {
         this.listaCliente = listaCliente;
     }
+
     public void setCheckIn(LocalDate checkIn) {
         this.checkIn = checkIn;
     }
+
     public void setCheckOut(LocalDate checkOut) {
         this.checkOut = checkOut;
     }
+
     public void setCliente(Cliente cliente) {
-        this.cliente= cliente;
+        this.cliente = cliente;
     }
+
     public void setEstado(EstadoReserva estado) {
         this.estado = estado;
     }
+
     public void setMontoTotal(int montoTotal) {
         this.montoTotal = montoTotal;
     }
+
+    public void setFactura(Factura fact) {
+        this.factura = fact;
+    }
+
     public void setHabitacion(Habitacion habitacion) {
         this.habitacion = habitacion;
     }
+
     public void setExtras(ArrayList<Extra> extras) {
         this.extras = extras;
     }
+
     public void setActiva(boolean activa) {
         this.activa = activa;
     }
 
-    //methods
+    public void setDescuento(Descuento desc) {
+        this.descuento = desc;
+    }
+
+    // methods
+
+    public void pagarReserva() {
+        this.estado = new Pagada(this);
+        this.crearFactura();
+    }
+
+    public void cancelarReserva() {
+        this.estado = new Cancelada(this);
+        this.activa = false;
+    }
+
     public void crearFactura() {
-        //usar singleton para el controller reserva
-        ControllerReserva controllerReserva = new ControllerReserva();
+        ControllerReserva controllerReserva = ControllerReserva.getInstance();
 
         int cantFacturas = controllerReserva.getListaFacturas().size();
         int nroFactura = cantFacturas + 1;
@@ -125,11 +172,11 @@ public class Reserva {
         this.factura = nuevaFactura;
     }
 
-    public void calcMonto(){
+    public void calcMonto() {
 
         int total = 0;
         int totalExtras = 0;
-        for (Extra extra:extras){
+        for (Extra extra : extras) {
             totalExtras += extra.getPrecio();
         }
 
@@ -138,7 +185,8 @@ public class Reserva {
 
         this.montoTotal = total;
     }
-    
-    
-    
+
+    public void agregarDescuento(Descuento descuento) {
+        this.descuento = descuento;
+    }
 }

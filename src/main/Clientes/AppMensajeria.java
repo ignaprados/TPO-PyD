@@ -3,26 +3,23 @@ package main.Clientes;
 public class AppMensajeria {
     private MedioDeContacto medio;
 
-
-    //constructor
-    public AppMensajeria(MedioDeContacto medio){
+    // constructor
+    public AppMensajeria(MedioDeContacto medio) {
         this.medio = medio;
     }
 
-
-    //getters
+    // getters
     public MedioDeContacto getMedio() {
         return medio;
     }
 
-
-    //setters
+    // setters
     public void setMedioDeContacto(MedioDeContacto medio) {
         this.medio = medio;
     }
 
-    public void enviarNotificacion(String mensaje, Cliente cliente){
-        MedioDeContacto.enviarNotificacion(mensaje, cliente.getMedioDeContacto())
+    public void enviarNotificacion(String mensaje, Cliente cliente) {
+        MedioDeContacto.enviarMensaje(mensaje, cliente.getContacto());
     }
 
 }
