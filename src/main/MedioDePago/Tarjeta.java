@@ -2,10 +2,9 @@ package main.MedioDePago;
 
 import java.time.LocalDate;
 
-import main.EstadoReserva.Pagada;
 import main.Reservas.Reserva;
 
-public abstract class Tarjeta implements MedioDePago {
+public abstract class Tarjeta extends MedioDePago {
 
     protected int CVV;
     protected int numero;
@@ -53,9 +52,7 @@ public abstract class Tarjeta implements MedioDePago {
         return this.fechaVto;
     }
 
-    public void pagar(Reserva reserva) {
-        reserva.setEstado(new Pagada(reserva));
-        reserva.crearFactura();
-    }
+    // methods
+    public abstract void pagar(Reserva reserva);
 
 }

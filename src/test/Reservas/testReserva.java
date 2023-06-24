@@ -1,6 +1,7 @@
 package test.Reservas;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -10,15 +11,16 @@ import org.junit.Test;
 
 import main.Clientes.Cliente;
 import main.Clientes.MedioDeContacto.Medios;
+import main.EstadoReserva.Cancelada;
 import main.Habitacion.Comun;
 import main.Habitacion.Habitacion;
 import main.Habitacion.Suite;
-import main.MedioDePago.MedioDePago;
+import main.MedioDePago.Efectivo;
+import main.MedioDePago.Transferencia;
 import main.Reservas.ControllerReserva;
 import main.Reservas.Factura;
 import main.Reservas.Reserva;
 import main.Reservas.Extras.Extra;
-import test.Reservas.Extras.mockMedioDePago;
 
 public class testReserva {
 
@@ -33,11 +35,7 @@ public class testReserva {
     private Extra extra1;
     private Extra extra2;
     private Extra extra3;
-    private MedioDePago mockMedioDePago;
 
-    /**
-     *
-     */
     @Before
     public void setUp() {
 
@@ -52,9 +50,9 @@ public class testReserva {
         habitacionReserva1 = new Suite(1, 215, 15690.0);
         habitacionReserva2 = new Comun(1, 417, 9584.5);
 
-        extra1 = new Extra(001, "TV", 500);
-        extra2 = new Extra(002, "Frigobar", 1500);
-        extra3 = new Extra(003, "PlayStation", 7000);
+        extra1 = new Extra(001, "TV", 500.0);
+        extra2 = new Extra(002, "Frigobar", 1500.0);
+        extra3 = new Extra(003, "PlayStation", 7000.0);
 
         ArrayList<Extra> extrasReserva1 = new ArrayList<Extra>();
         ArrayList<Extra> extrasReserva2 = new ArrayList<Extra>();
@@ -64,32 +62,38 @@ public class testReserva {
 
         extrasReserva2.add(extra2);
 
-        mockMedioDePago = new mockMedioDePago();
-
         reserva1 = new Reserva(LocalDate.of(2023, 6, 25), LocalDate.of(2023, 6, 29), cliente1, listaClientesReserva1,
-                mockMedioDePago, 0, habitacionReserva1, extrasReserva1);
+                new Transferencia("458754781", "001"), habitacionReserva1, extrasReserva1);
         reserva2 = new Reserva(LocalDate.of(2023, 7, 14), LocalDate.of(2023, 8, 1), cliente2, listaClientesReserva2,
-                mockMedioDePago, 0, habitacionReserva2, extrasReserva2);
+                new Efectivo(), habitacionReserva2, extrasReserva2);
     }
 
     @Test
     public void testCancelarReserva() {
         reserva1.cancelarReserva();
         assertEquals(reserva1.getActiva(), false);
+        assertTrue(reserva1.getEstado() instanceof Cancelada);
     }
 
     @Test
     public void testCrearFactura() {
         ControllerReserva controller = ControllerReserva.getInstance();
-
         ArrayList<Factura> facturas = controller.getListaFacturas();
-        int cantFacturas = facturas.size();
 
-        assertEquals(cantFacturas, reserva1.getFactura().getNroFactura());
+        int cantFacturasAntes = facturas.size();
+
+        reserva1.crearFactura();
+
+        int cantFacturasDespues = facturas.size();
+
+        assertEquals(cantFacturasAntes + 1, cantFacturasDespues);
     }
 
     @Test
     public void testCalcMonto() {
-        assertEquals(reserva1.calcMonto(), 15690.0 + 500 + 7)
+        Double montoTotal = 15690.00 + 500.00 + 7000.00;
+        reserva1.calcMonto();
+        assertEquals(montoTotal, reserva1.getMontoTotal());
     }
+
 }

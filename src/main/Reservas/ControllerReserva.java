@@ -1,4 +1,5 @@
 package main.Reservas;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -13,38 +14,39 @@ public class ControllerReserva {
 
     private static ControllerReserva instancia;
 
-    //constructor
+    // constructor
     private ControllerReserva() {
         this.listaReservas = new ArrayList<Reserva>();
         this.listaFacturas = new ArrayList<Factura>();
     }
 
-    //singleton
-    public static ControllerReserva getInstance(){
-        if(instancia == null){
+    // singleton
+    public static ControllerReserva getInstance() {
+        if (instancia == null) {
             instancia = new ControllerReserva();
         }
 
         return instancia;
     }
 
-    //getters y setters
+    // getters y setters
     public ArrayList<Reserva> getListaReservas() {
         return listaReservas;
     }
+
     public void setListaReservas(ArrayList<Reserva> listaReservas) {
         this.listaReservas = listaReservas;
     }
 
-    public void setListaFacturas(ArrayList<Factura> listaFacturas){
+    public void setListaFacturas(ArrayList<Factura> listaFacturas) {
         this.listaFacturas = listaFacturas;
     }
 
-    public ArrayList<Factura> getListaFacturas(){
+    public ArrayList<Factura> getListaFacturas() {
         return listaFacturas;
     }
 
-     // CRUD Reservas
+    // CRUD Reservas
     public void agregarReserva(Reserva nuevoReserva) {
         listaReservas.add(nuevoReserva);
     }
@@ -57,13 +59,16 @@ public class ControllerReserva {
         listaFacturas.add(nuevaFactura);
     }
 
-    public void eliminarFactura(Factura Factura){
+    public void eliminarFactura(Factura Factura) {
         listaFacturas.remove(Factura);
     }
 
-    //methods
-    public void crearReserva(LocalDate checkIn, LocalDate checkOut, Cliente cliente, ArrayList<Cliente> listaCliente, MedioDePago formaDePago,  int montoTotal,  Habitacion habitacion, ArrayList<Extra> extras){
-        Reserva nuevaReserva = new Reserva(checkIn, checkOut, cliente, listaCliente, formaDePago,  montoTotal, habitacion, extras);
+    // methods
+    public void crearReserva(LocalDate checkIn, LocalDate checkOut, Cliente cliente, ArrayList<Cliente> listaCliente,
+            MedioDePago formaDePago, Double montoTotal, Habitacion habitacion, ArrayList<Extra> extras) {
+
+        Reserva nuevaReserva = new Reserva(checkIn, checkOut, cliente, listaCliente, formaDePago,
+                habitacion, extras);
         habitacion.setOcupada(true);
         agregarReserva(nuevaReserva);
     }

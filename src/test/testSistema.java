@@ -107,13 +107,4 @@ public class testSistema {
         assertEquals(habitacion, null);
     }
 
-    @Test
-    public void testImprimirReporteOcupadas() {
-
-    }
-
-    @Test
-    public void testImprimirReporteLibres() {
-
-    }
 }

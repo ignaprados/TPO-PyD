@@ -50,7 +50,8 @@ public class testControllerReserva {
 
         listaExtras = new ArrayList<Extra>();
 
-        reserva = new Reserva(checkIn, checkOut, cliente, listaClientes, tarjetaCredito, 100, habitacion, listaExtras);
+        reserva = new Reserva(checkIn, checkOut, cliente, listaClientes, tarjetaCredito, habitacion,
+                listaExtras);
     }
 
     @Test
@@ -77,7 +78,7 @@ public class testControllerReserva {
     public void testCrearReserva() {
         controller.setListaReservas(new ArrayList<Reserva>());
 
-        controller.crearReserva(checkIn, checkOut, cliente, listaClientes, tarjetaCredito, 100, habitacion,
+        controller.crearReserva(checkIn, checkOut, cliente, listaClientes, tarjetaCredito, 100.00, habitacion,
                 listaExtras);
 
         Reserva nueva_reserva = controller.getListaReservas().get(0);
@@ -88,7 +89,8 @@ public class testControllerReserva {
         assertEquals(nueva_reserva.getListaCliente(), listaClientes);
         assertEquals(nueva_reserva.getFormaDePago(), tarjetaCredito);
         assertTrue(nueva_reserva.getEstado() instanceof PendienteDePago);
-        assertEquals(nueva_reserva.getMontoTotal(), 100);
+        assertEquals(Double.valueOf(nueva_reserva.getMontoTotal()), Double.valueOf(100.00));
+
         assertEquals(nueva_reserva.getHabitacion(), habitacion);
         assertTrue(nueva_reserva.getHabitacion().isOcupada());
         assertEquals(nueva_reserva.getExtras(), listaExtras);
@@ -98,20 +100,21 @@ public class testControllerReserva {
     public void testCancelarReserva() {
         controller.cancelarReserva(reserva);
         assertTrue(reserva.getEstado() instanceof Cancelada);
+        assertEquals(reserva.getActiva(), false);
     }
 
     @Test
     public void testAgregarFactura() {
-        controller.agregarFactura(new Factura(100, 300));
-        controller.agregarFactura(new Factura(101, 500));
+        controller.agregarFactura(new Factura(100, 300.0));
+        controller.agregarFactura(new Factura(101, 500.0));
         assertEquals(controller.getListaFacturas().size(), 2);
     }
 
     @Test
     public void testEliminarFactura() {
-        Factura factura1 = new Factura(102, 400);
-        controller.agregarFactura(new Factura(100, 300));
-        controller.agregarFactura(new Factura(101, 500));
+        Factura factura1 = new Factura(102, 400.0);
+        controller.agregarFactura(new Factura(100, 300.0));
+        controller.agregarFactura(new Factura(101, 500.0));
         controller.agregarFactura(factura1);
         controller.eliminarFactura(factura1);
         assertEquals(controller.getListaFacturas().size(), 2);

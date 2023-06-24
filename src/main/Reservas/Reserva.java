@@ -23,7 +23,7 @@ public class Reserva {
     private MedioDePago formaDePago;
     private LocalDateTime fechaReserva; // fecha y horario en el que se realizó la reserva
     private EstadoReserva estado;
-    private int montoTotal;
+    private Double montoTotal;
     private Factura factura = null;
     private Habitacion habitacion;
     private ArrayList<Extra> extras;
@@ -32,7 +32,7 @@ public class Reserva {
 
     // constructor
     public Reserva(LocalDate checkIn, LocalDate checkOut, Cliente cliente, ArrayList<Cliente> listaCliente,
-            MedioDePago formaDePago, int montoTotal, Habitacion habitacion, ArrayList<Extra> extras) {
+            MedioDePago formaDePago, Habitacion habitacion, ArrayList<Extra> extras) {
         this.checkIn = checkIn;
         this.checkOut = checkOut;
         this.cliente = cliente;
@@ -40,7 +40,7 @@ public class Reserva {
         this.formaDePago = formaDePago;
         this.fechaReserva = LocalDateTime.now();
         this.estado = new PendienteDePago(this);
-        this.montoTotal = montoTotal;
+        this.montoTotal = 0.00;
         this.habitacion = habitacion;
         this.extras = extras;
         this.activa = true;
@@ -77,7 +77,8 @@ public class Reserva {
         return estado;
     }
 
-    public int getMontoTotal() {
+    public Double getMontoTotal() {
+        this.calcMonto(); // llama antes a calcMonto para obtener siempre el monto actualizado
         return montoTotal;
     }
 
@@ -126,7 +127,7 @@ public class Reserva {
         this.estado = estado;
     }
 
-    public void setMontoTotal(int montoTotal) {
+    public void setMontoTotal(Double montoTotal) {
         this.montoTotal = montoTotal;
     }
 
@@ -153,13 +154,12 @@ public class Reserva {
     // methods
 
     public void pagarReserva() {
-        this.estado = new Pagada(this);
-        this.crearFactura();
+        this.estado.pagarReserva();
+
     }
 
     public void cancelarReserva() {
-        this.estado = new Cancelada(this);
-        this.activa = false;
+        this.estado.cancelarReserva();
     }
 
     public void crearFactura() {
@@ -168,25 +168,24 @@ public class Reserva {
         int cantFacturas = controllerReserva.getListaFacturas().size();
         int nroFactura = cantFacturas + 1;
         Factura nuevaFactura = new Factura(nroFactura, this.getMontoTotal());
-        controllerReserva.agregarFactura(nuevaFactura);
         this.factura = nuevaFactura;
+        controllerReserva.agregarFactura(nuevaFactura);
     }
 
     public void calcMonto() {
 
-        int total = 0;
-        int totalExtras = 0;
+        Double total = 0.0;
+        Double totalExtras = 0.0;
         for (Extra extra : extras) {
             totalExtras += extra.getPrecio();
         }
 
-        total += totalExtras;
         total += this.habitacion.getPrecioBase();
+
+        total = total * this.descuento.getDescuento();
+        total += totalExtras;
 
         this.montoTotal = total;
     }
 
-    public void agregarDescuento(Descuento descuento) {
-        this.descuento = descuento;
-    }
 }

@@ -3,16 +3,14 @@ package main.Reservas.Extras;
 public class Extra {
     private int ID;
     private String descripcion;
-    private int precio;
-
+    private Double precio;
 
     // constructor
-    public Extra(int ID, String descripcion, int precio) {
+    public Extra(int ID, String descripcion, Double precio) {
         this.ID = ID;
         this.descripcion = descripcion;
         this.precio = precio;
     }
-
 
     // getters
     public int getID() {
@@ -23,17 +21,16 @@ public class Extra {
         return descripcion;
     }
 
-    public int getPrecio() {
+    public Double getPrecio() {
         return precio;
     }
-
 
     // setters
     public void setID(int ID) {
         this.ID = ID;
     }
 
-    public void setPrecio(int precio) {
+    public void setPrecio(Double precio) {
         this.precio = precio;
     }
 
@@ -42,5 +39,3 @@ public class Extra {
     }
 
 }
-
-

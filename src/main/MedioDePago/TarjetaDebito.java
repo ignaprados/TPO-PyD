@@ -11,6 +11,7 @@ public class TarjetaDebito extends Tarjeta {
     private int numero;
     private String nombre;
     private LocalDate fechaVto;
+    private AdaptadorMercadoPago adaptador;
 
     // Constructor heredado
     public TarjetaDebito(int CVV, int numero, String nombre, LocalDate fechaVto) {
@@ -52,8 +53,7 @@ public class TarjetaDebito extends Tarjeta {
 
     // métodos
     public void pagar(Reserva reserva) {
-        reserva.setEstado(new Pagada(reserva));
-        reserva.crearFactura();
+        this.adaptador.pagarReserva(reserva);
     }
 
 }

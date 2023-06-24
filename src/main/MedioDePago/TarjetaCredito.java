@@ -8,6 +8,7 @@ import main.Reservas.Reserva;
 public class TarjetaCredito extends Tarjeta {
 
     private int cantCuotas;
+    private AdaptadorMercadoPago adaptador;
 
     // constructor heredado
     public TarjetaCredito(int CVV, int numero, String nombre, LocalDate fechaVto, int cuotas) {
@@ -57,9 +58,9 @@ public class TarjetaCredito extends Tarjeta {
     }
 
     // métodos
+    @Override
     public void pagar(Reserva reserva) {
-        reserva.setEstado(new Pagada(reserva));
-        reserva.crearFactura();
+        this.adaptador.pagarReserva(reserva);
     }
 
 }

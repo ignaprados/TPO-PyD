@@ -1,17 +1,18 @@
 package main.MedioDePago;
 
-import main.EstadoReserva.Pagada;
 import main.Reservas.Reserva;
 
-public class Transferencia implements MedioDePago {
+public class Transferencia extends MedioDePago {
 
     private String CBU;
     private String nroComprobante;
+    private AdaptadorMercadoPago adaptador;
 
     // constructor
     public Transferencia(String CBU, String nroComprobante) {
         this.CBU = CBU;
         this.nroComprobante = nroComprobante;
+        this.adaptador = new AdaptadorMercadoPago();
     }
 
     // setters
@@ -33,7 +34,6 @@ public class Transferencia implements MedioDePago {
     }
 
     public void pagar(Reserva reserva) {
-        reserva.setEstado(new Pagada(reserva));
-        reserva.crearFactura();
+        this.adaptador.pagarReserva(reserva);
     }
 }

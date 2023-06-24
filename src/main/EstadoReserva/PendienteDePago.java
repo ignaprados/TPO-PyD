@@ -9,9 +9,9 @@ public class PendienteDePago extends EstadoReserva {
     }
 
     public void pagarReserva() {
+        this.reserva.setEstado(new Pagada(reserva));
         this.reserva.crearFactura();
         this.reserva.getFormaDePago().pagar(this.reserva);
-        this.reserva.setEstado(new Pagada(reserva));
     }
 
     public void cancelarReserva() {

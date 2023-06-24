@@ -1,7 +1,6 @@
 package main.Descuentos;
 
 public class Desc2Meses extends Descuento {
-    private Double descuento;
 
     // constructor
     public Desc2Meses() {

@@ -8,11 +8,9 @@ import java.util.ArrayList;
 // Import Assert
 import static org.junit.Assert.*;
 
-
 // Import Extras
 import main.Reservas.Extras.Extra;
 import main.Reservas.Extras.Extras;
-
 
 public class testExtras {
 
@@ -23,8 +21,8 @@ public class testExtras {
     @Before
     public void setUp() {
         extras = new Extras();
-        extra1 = new Extra(001, "Extra 1", 1000);
-        extra2 = new Extra(002, "Extra 2", 1500);
+        extra1 = new Extra(001, "Extra 1", 1000.00);
+        extra2 = new Extra(002, "Extra 2", 1500.00);
 
         extras.agregarExtra(extra1);
         extras.agregarExtra(extra2);
@@ -33,7 +31,7 @@ public class testExtras {
     @Test
     public void testAgregarExtra() {
         ArrayList<Extra> listaExtras = extras.getListaExtra();
-        Extra extra3 = new Extra(003,"Extra 3",800);
+        Extra extra3 = new Extra(003, "Extra 3", 800.00);
 
         extras.agregarExtra(extra3);
 
