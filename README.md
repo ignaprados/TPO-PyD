@@ -1,2 +1,2 @@
 # TPO-PyD
-Grupo 6 - Hotelísima
+Grupo 6 - Hotelíssima
