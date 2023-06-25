@@ -1,3 +1,3 @@
 ![Hotelísima Banner](https://i.ibb.co/KqpyvSV/hotelisiima.png)
-# TPO-PyD
-Grupo 6 - Hotelíssima
+# Hotelíssima | TPO-PyD
+Hecho con 🖤 por el Grupo 6
