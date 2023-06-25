@@ -33,6 +33,10 @@ public class Transferencia extends MedioDePago {
         return this.nroComprobante;
     }
 
+    public String toString() {
+        return "transferencia";
+    }
+
     public void pagar(Reserva reserva) {
         this.adaptador.pagarReserva(reserva);
     }

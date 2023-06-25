@@ -52,6 +52,10 @@ public class TarjetaDebito extends Tarjeta {
     }
 
     // métodos
+    public String toString() {
+        return "tarjeta de débito";
+    }
+
     public void pagar(Reserva reserva) {
         this.adaptador.pagarReserva(reserva);
     }

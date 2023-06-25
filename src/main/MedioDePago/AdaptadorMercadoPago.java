@@ -6,6 +6,6 @@ public class AdaptadorMercadoPago {
 
     public void pagarReserva(Reserva reserva) {
         String texto = reserva.getFormaDePago().toString();
-        System.out.println("Reserva pagada con" + texto);
+        System.out.println("Reserva pagada con " + texto + ".");
     }
 }

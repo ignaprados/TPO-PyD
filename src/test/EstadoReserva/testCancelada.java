@@ -68,14 +68,4 @@ public class testCancelada {
 
     }
 
-    @Test
-    public void testProvisorio() {
-        reserva.setFormaDePago(new Transferencia("hola", "precio"));
-
-        AdaptadorMercadoPago adaptador = new AdaptadorMercadoPago();
-
-        adaptador.pagarReserva(reserva);
-
-    }
-
 }

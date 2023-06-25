@@ -58,6 +58,10 @@ public class TarjetaCredito extends Tarjeta {
     }
 
     // métodos
+    public String toString() {
+        return "tarjeta de crédito";
+    }
+
     @Override
     public void pagar(Reserva reserva) {
         this.adaptador.pagarReserva(reserva);
