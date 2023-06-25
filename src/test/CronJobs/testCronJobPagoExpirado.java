@@ -27,6 +27,8 @@ public class testCronJobPagoExpirado {
     @Before
     public void setUp() {
 
+        controllerReserva = controllerReserva.getInstance();
+
         cliente = new Cliente("Nombre1", "Apellido1", "12345678", "11-12345678", "mail1@gmail.com", Medios.SMS);
         ArrayList<Cliente> listaClientes = new ArrayList<Cliente>();
         listaClientes.add(cliente);
@@ -49,7 +51,7 @@ public class testCronJobPagoExpirado {
     }
 
     @Test
-    public void testPagoExpirado() { // chequear
+    public void testPagoExpirado() {
         CronJobPagoExpirado.pagoExpirado(reserva);
 
         assertTrue(reserva.getEstado() instanceof Cancelada);

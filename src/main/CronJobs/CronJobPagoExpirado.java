@@ -12,7 +12,6 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class CronJobPagoExpirado {
-    private ArrayList<Reserva> reservas;
     private static int horasMax;
 
     // controller que tiene todas las reservas
@@ -20,13 +19,12 @@ public class CronJobPagoExpirado {
 
     // Constructor
     public CronJobPagoExpirado(ControllerReserva controllerReserva) {
-        reservas = controllerReserva.getListaReservas();
         CronJobPagoExpirado.horasMax = 24;
+        CronJobPagoExpirado.controllerReserva = controllerReserva;
     }
 
     public static void main(String[] args) {
 
-        // Get Reservas
         ArrayList<Reserva> reservas = controllerReserva.getListaReservas();
 
         // Create a Timer
