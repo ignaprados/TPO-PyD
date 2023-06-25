@@ -1,6 +1,6 @@
 package main.Clientes;
 
-public abstract class MedioDeContacto {
+public class MedioDeContacto {
     private Medios medioDeContacto;
 
     public enum Medios {
@@ -24,22 +24,10 @@ public abstract class MedioDeContacto {
         this.medioDeContacto = medioDeContacto;
     }
 
-    public static void enviarMensaje(String mensaje, Medios medio) {
-        switch (medio) {
-            case SMS:
-                System.out.println("Enviando por SMS el siguiente mensaje:" + mensaje);
-                break;
+    public void enviarMensaje(String mensaje, Medios medio) {
 
-            case WHATSAPP:
-                System.out.println("Enviando por Whatsapp el siguiente mensaje:" + mensaje);
-                break;
-
-            case EMAIL:
-                System.out.println("Enviando por email el siguiente mensaje:" + mensaje);
-                break;
-            default:
-                break;
-        }
+        String texto = medio.toString();
+        System.out.println("ENVIANDO POR " + texto + " EL SIGUIENTE MENSAJE: " + mensaje);
     }
 
 }

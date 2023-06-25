@@ -1,8 +1,6 @@
 package test.EstadoReserva;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,9 +17,6 @@ import main.MedioDePago.Transferencia;
 
 import main.Reservas.Reserva;
 import main.Reservas.Extras.Extra;
-
-import main.MedioDePago.Efectivo;
-import main.MedioDePago.AdaptadorMercadoPago;
 
 public class testCancelada {
 
@@ -43,7 +38,7 @@ public class testCancelada {
         extrasReserva1.add(extra2);
 
         reserva = new Reserva(LocalDate.of(2023, 6, 25), LocalDate.of(2023, 6, 29), cliente, new ArrayList<Cliente>(),
-                new Transferencia("458754781", "001"), habitacionReserva2, extrasReserva1);
+                new Transferencia("458754781", 001), habitacionReserva2, extrasReserva1);
 
         reserva.setEstado(new Cancelada(reserva));
 

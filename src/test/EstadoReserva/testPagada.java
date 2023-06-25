@@ -1,6 +1,5 @@
 package test.EstadoReserva;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
@@ -41,7 +40,7 @@ public class testPagada {
         extrasReserva1.add(extra2);
 
         reserva = new Reserva(LocalDate.of(2023, 6, 25), LocalDate.of(2023, 6, 29), cliente, new ArrayList<Cliente>(),
-                new Transferencia("458754781", "001"), habitacionReserva2, extrasReserva1);
+                new Transferencia("458754781", 001), habitacionReserva2, extrasReserva1);
 
         reserva.setEstado(new Pagada(reserva));
     }

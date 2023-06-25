@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import main.CronJobs.CronJobPagoExpirado;
 import main.Habitacion.Comun;
 import main.Habitacion.Suite;
+import main.Reservas.ControllerReserva;
 import main.Habitacion.Habitacion;
 
 public class Sistema {
@@ -15,22 +16,23 @@ public class Sistema {
 
     private static Sistema instancia;
 
-    //contructor
-    private Sistema(){
+    // contructor
+    private Sistema() {
         listaHabitaciones = new ArrayList<Habitacion>();
+        cronJobPagoExpirado = new CronJobPagoExpirado(ControllerReserva.getInstance());
     }
 
-    //singleton
-    public static Sistema getInstance(){
-        if(instancia == null){
+    // singleton
+    public static Sistema getInstance() {
+        if (instancia == null) {
             instancia = new Sistema();
         }
 
         return instancia;
     }
 
-    //getters
-    public ArrayList<Habitacion> getListaHabitaciones(){
+    // getters
+    public ArrayList<Habitacion> getListaHabitaciones() {
         return this.listaHabitaciones;
     }
 
@@ -38,17 +40,17 @@ public class Sistema {
         return this.cronJobPagoExpirado;
     }
 
-    //metodos
-    public boolean habitacionExiste(int nroHabitacion){
+    // metodos
+    public boolean habitacionExiste(int nroHabitacion) {
         List<Habitacion> listaHabitacionFiltrada = listaHabitaciones.stream()
-        .filter(h -> h.getNroHabitacion() == nroHabitacion)
-        .collect(Collectors.toList());
+                .filter(h -> h.getNroHabitacion() == nroHabitacion)
+                .collect(Collectors.toList());
         if (listaHabitacionFiltrada.size() > 0)
             return true;
         return false;
     }
 
-    public void crearHabitacionComun(int cantPersonas, int nroHabitacion, Double precioBase){
+    public void crearHabitacionComun(int cantPersonas, int nroHabitacion, Double precioBase) {
         Habitacion nuevaHabitacion = new Comun(cantPersonas, nroHabitacion, precioBase);
         if (!(habitacionExiste(nroHabitacion)))
             agregarHabitacion(nuevaHabitacion);
@@ -56,7 +58,7 @@ public class Sistema {
             System.out.println("Ya existe una habitacion con ese número.");
     }
 
-    public void crearHabitacionSuite(int cantPersonas, int nroHabitacion, Double precioBase){
+    public void crearHabitacionSuite(int cantPersonas, int nroHabitacion, Double precioBase) {
         Habitacion nuevaHabitacion = new Suite(cantPersonas, nroHabitacion, precioBase);
         if (!(habitacionExiste(nroHabitacion)))
             agregarHabitacion(nuevaHabitacion);
@@ -64,7 +66,7 @@ public class Sistema {
             System.out.println("Ya existe una habitacion con ese número.");
     }
 
-    public void agregarHabitacion(Habitacion habitacion){
+    public void agregarHabitacion(Habitacion habitacion) {
         this.listaHabitaciones.add(habitacion);
     }
 
@@ -72,12 +74,12 @@ public class Sistema {
         cronJobPagoExpirado.setHorasMax(plazoHoras);
     }
 
-    //reportes
-    public ArrayList<String> generarReporteOcupadas(){
+    // reportes
+    public ArrayList<String> generarReporteOcupadas() {
         ArrayList<String> reporte = new ArrayList<String>();
 
-        for(Habitacion habitacion:listaHabitaciones){
-            if(habitacion.isOcupada()){
+        for (Habitacion habitacion : listaHabitaciones) {
+            if (habitacion.isOcupada()) {
                 String mensaje = ("Número de habitación: " + habitacion.getNroHabitacion() + "LIBRE");
                 reporte.add(mensaje);
             }
@@ -85,11 +87,11 @@ public class Sistema {
         return reporte;
     }
 
-    public ArrayList<String> generarReporteLibres(){
+    public ArrayList<String> generarReporteLibres() {
         ArrayList<String> reporte = new ArrayList<String>();
 
-        for(Habitacion habitacion:listaHabitaciones){
-            if(!habitacion.isOcupada()){
+        for (Habitacion habitacion : listaHabitaciones) {
+            if (!habitacion.isOcupada()) {
                 String mensaje = ("Número de habitación: " + habitacion.getNroHabitacion() + "OCUPADA");
                 reporte.add(mensaje);
             }
@@ -97,18 +99,17 @@ public class Sistema {
         return reporte;
     }
 
-    public void imprimirReporte(boolean habitacionesOcupadas){
+    public void imprimirReporte(boolean habitacionesOcupadas) {
 
         ArrayList<String> reporte = new ArrayList<String>();
 
         if (habitacionesOcupadas == false) {
             reporte = generarReporteLibres();
-        }
-        else {
+        } else {
             reporte = generarReporteOcupadas();
         }
 
-        for(int i = 0; i < reporte.size();i++){
+        for (int i = 0; i < reporte.size(); i++) {
             System.out.println(reporte.get(i));
         }
     }

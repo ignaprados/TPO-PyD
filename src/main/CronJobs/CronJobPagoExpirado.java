@@ -12,7 +12,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class CronJobPagoExpirado {
-    private ArrayList <Reserva> reservas;
+    private ArrayList<Reserva> reservas;
     private static int horasMax;
 
     // controller que tiene todas las reservas
@@ -21,9 +21,8 @@ public class CronJobPagoExpirado {
     // Constructor
     public CronJobPagoExpirado(ControllerReserva controllerReserva) {
         reservas = controllerReserva.getListaReservas();
-        this.horasMax = 24;
+        CronJobPagoExpirado.horasMax = 24;
     }
-
 
     public static void main(String[] args) {
 
@@ -37,7 +36,8 @@ public class CronJobPagoExpirado {
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                // Itera cada reserva y ejecuta el metodo pagoExpirado() que se ocupa de cancelar la reserva si expiro.
+                // Itera cada reserva y ejecuta el metodo pagoExpirado() que se ocupa de
+                // cancelar la reserva si expiro.
                 for (Reserva reserva : reservas) {
                     pagoExpirado(reserva);
                 }
@@ -48,26 +48,27 @@ public class CronJobPagoExpirado {
         timer.schedule(task, 0, 60 * 60 * 1000);
     }
 
-    public static void pagoExpirado(Reserva reserva){
+    public static void pagoExpirado(Reserva reserva) {
 
-        if(reserva.getEstado() instanceof PendienteDePago){
+        if (reserva.getEstado() instanceof PendienteDePago) {
 
             long horasPasadas = calcularHorasPasadas(reserva);
 
-            if (horasPasadas >= horasMax){
+            if (horasPasadas >= horasMax) {
                 reserva.getEstado().cancelarReserva();
             }
 
         }
     }
 
-    public static long calcularHorasPasadas(Reserva reserva){
+    public static long calcularHorasPasadas(Reserva reserva) {
         LocalDateTime fechaHoraActual = LocalDateTime.now();
         Duration diferencia = Duration.between(reserva.getFechaReserva(), fechaHoraActual);
         long horasPasadas = diferencia.toHours();
         return horasPasadas;
     }
-    public void setHorasMax(int horasMaximas){
+
+    public void setHorasMax(int horasMaximas) {
         horasMax = horasMaximas;
     }
 
@@ -75,4 +76,3 @@ public class CronJobPagoExpirado {
         return horasMax;
     }
 }
-

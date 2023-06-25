@@ -2,13 +2,11 @@ package main.MedioDePago;
 
 import java.time.LocalDate;
 
-import main.EstadoReserva.Pagada;
 import main.Reservas.Reserva;
 
 public class TarjetaCredito extends Tarjeta {
 
     private int cantCuotas;
-    private AdaptadorMercadoPago adaptador;
 
     // constructor heredado
     public TarjetaCredito(int CVV, int numero, String nombre, LocalDate fechaVto, int cuotas) {
@@ -59,12 +57,13 @@ public class TarjetaCredito extends Tarjeta {
 
     // métodos
     public String toString() {
-        return "tarjeta de crédito";
+        return "tarjeta de credito";
     }
 
     @Override
     public void pagar(Reserva reserva) {
-        this.adaptador.pagarReserva(reserva);
+        AdaptadorMercadoPago adaptador = new AdaptadorMercadoPago();
+        adaptador.pagarReserva(reserva);
     }
 
 }

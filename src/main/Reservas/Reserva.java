@@ -5,9 +5,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import main.Clientes.Cliente;
-import main.EstadoReserva.Cancelada;
 import main.EstadoReserva.EstadoReserva;
-import main.EstadoReserva.Pagada;
 import main.EstadoReserva.PendienteDePago;
 import main.Habitacion.Habitacion;
 import main.MedioDePago.MedioDePago;

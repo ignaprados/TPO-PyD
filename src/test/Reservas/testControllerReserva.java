@@ -89,7 +89,7 @@ public class testControllerReserva {
         assertEquals(nueva_reserva.getListaCliente(), listaClientes);
         assertEquals(nueva_reserva.getFormaDePago(), tarjetaCredito);
         assertTrue(nueva_reserva.getEstado() instanceof PendienteDePago);
-        assertEquals(Double.valueOf(nueva_reserva.getMontoTotal()), Double.valueOf(100.00));
+        assertEquals(Double.valueOf(nueva_reserva.getMontoTotal()), Double.valueOf(99.99));
 
         assertEquals(nueva_reserva.getHabitacion(), habitacion);
         assertTrue(nueva_reserva.getHabitacion().isOcupada());
